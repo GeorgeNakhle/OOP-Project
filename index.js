@@ -1,7 +1,10 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-
+const {
+    registerPartialTemplate,
+     renderTemplate
+    } = require('./mvc/controllers/HandlebarsHelper');
 // Root directory for client files
 const CLIENT_PATH = './client';
 
@@ -16,7 +19,7 @@ const httpServer = http.createServer(expressApp);
 const io = socketio(httpServer);
 
 // Set the request listener to use the client path
-expressApp.use(express.static(CLIENT_PATH));
+//expressApp.use(express.static(CLIENT_PATH));
 
 // Start the HTTP server
 httpServer.listen(port, '0.0.0.0', () => {
@@ -40,3 +43,10 @@ io.on('connection', socket => {
         socket.emit('test');
     })
 });
+
+
+registerPartialTemplate('Header', './mvc/views/partials/Header.hbs').then(() => {
+    registerPartialTemplate('Footer', './mvc/views/partials/Footer.hbs').then(() => {
+        expressApp.use('/example', require('./mvc/controllers/example.js'));
+    })
+})
