@@ -1,11 +1,6 @@
 const router = require('express').Router();
 const model = require('../models/example.js');
-const {
-    registerPartialTemplate,
-     renderTemplate
-    } = require('./HandlebarsHelper');
-
-
+const {renderTemplate} = require('./HandlebarsHelper');
 
 router.get('/', (request, response) => {
     model.doStuff(request).then(data => {
