@@ -1,9 +1,17 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const path = require('path');
+
+// Get the project root path
+const projectRoot = path.dirname(require.main.filename);
+// Save MVC paths in env
+process.env.models = path.resolve(projectRoot, 'mvc', 'models');
+process.env.views = path.resolve(projectRoot, 'mvc', 'views');
+process.env.controllers = path.resolve(projectRoot, 'mvc', 'controllers');
 
 // Partial view renderer
-const {registerPartialTemplate} = require('./mvc/controllers/HandlebarsHelper');
+const {registerPartialTemplate} = require(`${process.env.controllers}/HandlebarsHelper`);
 
 // Port for the back-end to listen on
 const port = process.env.PORT || 8080;
@@ -38,9 +46,9 @@ io.on('connection', socket => {
 
 
 // Register Header and Footer partial views
-registerPartialTemplate('Header', './mvc/views/partials/Header.hbs').then(() => {
-    registerPartialTemplate('Footer', './mvc/views/partials/Footer.hbs').then(() => {
+registerPartialTemplate('Header', `${process.env.views}/partials/Header.hbs`).then(() => {
+    registerPartialTemplate('Footer', `${process.env.views}/partials/Footer.hbs`).then(() => {
         // Add routes here
-        expressApp.use('/example', require('./mvc/controllers/example.js'));
+        expressApp.use('/example', require(`${process.env.controllers}/example.js`));
     })
 })
