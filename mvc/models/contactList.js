@@ -94,7 +94,6 @@ function doStuff(request){
         resolve({
             header: "Contact List!",
             title: "Contacts",
-            content: "It contact list",
             payload: alphabetList,
         })
     });
