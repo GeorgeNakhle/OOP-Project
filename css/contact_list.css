@@ -1,0 +1,20 @@
+#contact-searchbar {
+    width: 90%;
+    height: 25px;
+}
+.contact-group-head {
+    margin: 0px;
+    background-color: burlywood;
+}
+.contact-group-body {
+    background-color: cornsilk;
+    text-indent: 7%;
+}
+.contact-group-item {
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+.scroll {
+    max-height: 770px;
+    overflow-y: scroll;
+}

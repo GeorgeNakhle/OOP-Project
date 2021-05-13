@@ -17,7 +17,33 @@
     <script src="/js/contact_list.js"></script>
 </head>
 <body>
-    <h2>Stuff from model</h2>
-    <p>{{content}}</p>
+    <main>
+        <div>
+            <input id="contact-searchbar" type="text" placeholder="Search.."> 
+            <button>+</button> 
+        </div>
+        <div class="scroll">
+
+        {{#each payload}}  
+            <div class="contact-group" id="contact-group-{{@key}}">
+                <h3 class="contact-group-head">
+                    {{@key}}
+                </h3>
+
+                <div class="contact-group-body">
+                    {{#each this}}
+                        <div class="contact-group-item">
+                            {{this.username}}
+                        </div>
+                    {{/each}}
+                </div>
+                
+            </div>
+        {{/each}}
+
+        </div>
+       
+    </main>
+   
 </body>
 </html>
