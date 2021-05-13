@@ -15,6 +15,8 @@ process.env.styles = path.resolve(projectRoot, 'css');
 process.env.scripts = path.resolve(projectRoot, 'js');
 // API stuff
 process.env.api = path.resolve(projectRoot, 'api');
+// Classes stuff
+process.env.classes = path.resolve(projectRoot, 'classes');
 
 // Partial view renderer
 const {registerPartialTemplate} = require(`${process.env.controllers}/HandlebarsHelper`);
