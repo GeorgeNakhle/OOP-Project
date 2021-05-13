@@ -65,6 +65,21 @@ Promise.all(promises).then(() => {
         res.sendFile(`${process.env.scripts}/${req.params.filename}`);
     });
 
-    // Add routes here
-    expressApp.use('/example', require(`${process.env.controllers}/example.js`));
+    // / and /home are the same
+    expressApp.use('/', require(`${process.env.controllers}/Home.js`));
+    expressApp.use('/home', require(`${process.env.controllers}/Home.js`));
+
+    expressApp.use('/login', require(`${process.env.controllers}/Login.js`));
+    expressApp.use('/register', require(`${process.env.controllers}/Register.js`));
+
+    expressApp.use('/chat', require(`${process.env.controllers}/Chat.js`));
+    expressApp.use('/chat-list', require(`${process.env.controllers}/ChatList.js`));
+    expressApp.use('/create-chat', require(`${process.env.controllers}/CreateChat.js`));
+    expressApp.use('/search-chat', require(`${process.env.controllers}/SearchChat.js`));
+    
+    expressApp.use('/add-contact', require(`${process.env.controllers}/AddContact.js`));
+    expressApp.use('/contact-list', require(`${process.env.controllers}/ContactList.js`));
+    expressApp.use('/contact-info', require(`${process.env.controllers}/ContactInfo.js`));
+
+    expressApp.use('/add-user', require(`${process.env.controllers}/AddUser.js`));
 });
