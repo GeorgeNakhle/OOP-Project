@@ -15,6 +15,8 @@ process.env.styles = path.resolve(projectRoot, 'css');
 process.env.scripts = path.resolve(projectRoot, 'js');
 // API stuff
 process.env.api = path.resolve(projectRoot, 'api');
+// Classes stuff
+process.env.classes = path.resolve(projectRoot, 'classes');
 
 // Partial view renderer
 const {registerPartialTemplate} = require(`${process.env.controllers}/HandlebarsHelper`);
@@ -77,7 +79,7 @@ Promise.all(promises).then(() => {
     });
 
     // Post handlers for API
-    expressApp.use('/api/*', require(`${process.env.api}/controller.js`))
+    expressApp.use('/api', require(`${process.env.api}/controller.js`))
 
     // / and /home are the same
     expressApp.use('/', require(`${process.env.controllers}/Home.js`));

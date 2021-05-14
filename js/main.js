@@ -9,45 +9,52 @@ const socket = io();
  * @returns {Promise} resolves with text response, or rejects with error
  */
 function fetchAPI(endpoint, data){
-    return fetch(`/api/${endpoint}`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-    }).then(async res => {
-        if (res.status != 200){
-            throw new Error(await res.text());
-        }
-    });
+    return new Promise((resolve, reject) => {
+        fetch(`/api/${endpoint}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(res => {
+            res.json().then(json => {
+                if (res.status == 200){
+                    resolve(json);
+                }
+                else{
+                    reject(new Error(json.error));
+                }
+            })
+        }).catch(reject);
+    })
 }
 
 /**
  * Deletes local cookie
  */
-function deleteCookie(){
-    window.name = '';
+function clearCookies(){
+    window.name = '{}';
 }
 
 /**
- * 
- * @param {object} data - Object to store in local cookie; can be string, dict, list, whatever, just has to be able to be turned into a JSON
+ * Sets a new cookie
+ * @param {string} key - The key for the cookie object
+ * @param {object} value - The value for the cookie object
  */
-function setCookie(data){
-    window.name = JSON.stringify(data);
+function setCookie(key, value){
+    if (window.name == '') window.name = '{}';
+    
+    let obj = JSON.parse(window.name);
+
+    obj[key] = value;
+    window.name = JSON.stringify(obj);
 }
 
 /**
- * Checks if the local cookie is set
- * @returns {bool} true if cookie is set to something, false otherwise
+ * Gets a cookie
+ * @param {string} key - The key for the cookie object
+ * @returns {*} the value of cookie if set, else undefined
  */
-function isCookieSet(){
-    return window.name != '' && window.name != null && window.name != undefined;
-}
+function getCookie(key){
+    if (window.name == '') window.name = '{}';
 
-/**
- * Gets the data stored in local cookie
- * @returns {object} the cookie data if cookie is set, otherwise throws an error
- */
-function getCookie(){
-    if (!isCookieSet) throw new Error('Unable to get cookie: cookie not set!');
-    return JSON.parse(window.name);
+    return JSON.parse(window.name)[key];
 }

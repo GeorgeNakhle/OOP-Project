@@ -1,7 +1,7 @@
 function doTheThing(request, response){
     const {username, password} = request.body;
 
-    verifyUsernamePassword(username, password).then(() => {
+    register(username, password).then(() => {
         generateToken().then(token => {
             response.status(200).end(JSON.stringify({token}));
         }).catch(err => {
@@ -14,12 +14,8 @@ function doTheThing(request, response){
     });
 }
 
-function verifyUsernamePassword(u, p){
-    const validUsers = {
-        'user': 'pass',
-        'test': 'pass',
-        'reee': 'eeer'
-    }
+function register(u, p){
+    const validUsers = [ 'user', 'test', 'reee' ];
     
     return new Promise((resolve, reject) => {
         if (!u){
@@ -28,8 +24,8 @@ function verifyUsernamePassword(u, p){
         else if (!p){
             reject(new Error('invalid password'));
         }
-        else if (validUsers[u] !== p){
-            reject(new Error('wrong username or password'));
+        else if (validUsers.indexOf(u) >= 0){
+            reject(new Error('username already exists'));
         }
         else{
             resolve();

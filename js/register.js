@@ -5,28 +5,29 @@ if (getCookie('token')){
 
 function onSubmit(){
     const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const passwords = document.getElementsByClassName('password');
 
     if (!username){
         alert('Enter a username!')
     }
-    else if (!password){
+    else if (!passwords[0].value || !passwords[1].value){
         alert('Enter a password!');
     }
+    else if (passwords[0].value != passwords[1].value){
+        alert('Passwords do not match!');
+    }
     else{
-        fetchAPI('login', {username, password}).then(res => {
+        const password = passwords[0].value;
+
+        fetchAPI('register', {username, password}).then(res => {
             setCookie('token', res.token);
             setCookie('username', username);
-
+            
             window.location = '/home';
         }).catch(err => {
             clearCookies();
             console.error(err);
-            alert(`Login error: ${err.message}!`);
+            alert(`Register error: ${err.message}!`);
         })
     }
-}
-
-function goRegister(){
-    window.location = '/register';
 }
