@@ -17,33 +17,31 @@
     <script src="/js/contact_list.js"></script>
 </head>
 <body>
-    {{!-- <main> --}}
+
         <div id="contact-addbar">
             <input id="contact-searchbar" type="text" placeholder="Search.."> 
             <button>+</button> 
         </div>
         <div class="scroll">
 
-        {{#each payload}}  
-            <div class="contact-group" id="contact-group-{{@key}}">
-                <h3 class="contact-group-head">
-                    {{@key}}
-                </h3>
+            {{#each payload}}  
+                <div class="contact-group" id="contact-group-{{@key}}">
+                    <h3 class="contact-group-head">
+                        {{@key}}
+                    </h3>
 
-                <div class="contact-group-body">
-                    {{#each this}}
-                        <div class="contact-group-item">
-                            {{this.username}}
-                        </div>
-                    {{/each}}
+                    <div class="contact-group-body">
+                        {{#each this}}
+                            <div class="contact-group-item" onclick="displayInfo('{{this.username}}');">
+                                {{this.username}}
+                            </div>
+                        {{/each}}
+                    </div>
+                    
                 </div>
-                
-            </div>
-        {{/each}}
+            {{/each}}
 
         </div>
-       
-    {{!-- </main> --}}
    
 </body>
 </html>
