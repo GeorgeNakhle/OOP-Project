@@ -79,7 +79,7 @@ Promise.all(promises).then(() => {
     });
 
     // Post handlers for API
-    expressApp.use('/api/*', require(`${process.env.api}/controller.js`))
+    expressApp.use('/api', require(`${process.env.api}/controller.js`))
 
     // / and /home are the same
     expressApp.use('/', require(`${process.env.controllers}/Home.js`));

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-// /api => /login
-router.use('/', require(`${process.env.api}/login.js`));
+router.post('/login', require(`${process.env.api}/login.js`));
+router.post('/register', require(`${process.env.api}/register.js`));
 
 module.exports = router;
