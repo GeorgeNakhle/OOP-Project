@@ -19,21 +19,21 @@
 </head>
 
 <body>
-    <main>
-        <h2>Chat</h2>
-        <div class="scroll">
-            {{#each messages}}
-            <ul class="chatMessage">
-                <li class="messageContact">{{contact}}</li>
-                <li class="messageText">{{text}}</li>
-                <li class="messageDate">{{date}}</li>
-            </ul>
-            {{/each}}
-        </div>
+    <h2>Chat</h2>
+    <div id="scroll">
+        {{#each messages}}
+        <ul class="chatMessage">
+            <li class="messageContact">{{contact}}</li>
+            <li class="messageText">{{text}}</li>
+            <li class="messageDate">{{date}}</li>
+        </ul>
+        {{/each}}
+    </div>
 
-        <input type="text" id="messageText" name="messageText" placeholder="Enter Text Message">
-        <button id="submitButton">➤</button>
-    </main>
+    <div id="inputArea">
+        <input type="text" id="inputText" name="inputText" placeholder="Enter Text Message">
+        <button id="inputButton" onclick="sendMessage()">➤</button>
+    </div>
 </body>
 
 </html>

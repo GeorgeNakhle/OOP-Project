@@ -1,5 +1,6 @@
 function doStuff(request) {
     return new Promise((resolve, reject) => {
+
         let date1 = new Date(2021, 10, 21, 10, 5, 0);
         let date2 = new Date(2021, 10, 22, 10, 5, 0);
         let date3 = new Date(2021, 10, 22, 11, 15, 0);
@@ -8,7 +9,7 @@ function doStuff(request) {
         let messages = [
             {
                 contact: "John Smith",
-                text: "Hello.",
+                text: "Lorem ipsum dolor sit ametur riditesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aen",
                 date: date1.toLocaleString()
             },
             {
@@ -50,7 +51,7 @@ function doStuff(request) {
                 contact: "David King",
                 text: "Doing the laundry.",
                 date: date4.toLocaleString()
-            },
+            }
         ];
 
         resolve({
