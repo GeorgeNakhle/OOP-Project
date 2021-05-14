@@ -1,0 +1,33 @@
+if (getCookie('token')){
+    alert(`Already logged in as ${getCookie('username')}!`);
+    window.location = '/home';
+}
+
+function onSubmit(){
+    const username = document.getElementById('username').value;
+    const passwords = document.getElementsByClassName('password');
+
+    if (!username){
+        alert('Enter a username!')
+    }
+    else if (!passwords[0].value || !passwords[1].value){
+        alert('Enter a password!');
+    }
+    else if (passwords[0].value != passwords[1].value){
+        alert('Passwords do not match!');
+    }
+    else{
+        const password = passwords[0].value;
+
+        fetchAPI('register', {username, password}).then(res => {
+            setCookie('token', res.token);
+            setCookie('username', username);
+            
+            window.location = '/home';
+        }).catch(err => {
+            clearCookies();
+            console.error(err);
+            alert(`Register error: ${err.message}!`);
+        })
+    }
+}

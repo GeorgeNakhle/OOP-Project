@@ -1,0 +1,21 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: 50%;
+}
+
+.form_item{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    width: 75%;
+}
