@@ -1,0 +1,87 @@
+body {
+    flex-direction: column;
+}
+
+#scroll {
+    overflow-y: scroll;
+}
+
+#topPart {
+    width: 100%;
+    text-align: center;
+}
+
+#inputArea {
+    height: 50px;
+    padding-bottom: 100px;
+    align-items: center;
+    align-content: center;
+}
+
+#searchText {
+    height: 100%;
+    width: 60%;
+    padding: 0px;
+    margin-bottom: 10px;
+    outline: 0px;
+    font-size: 20px;
+    background-color: beige;
+}
+
+#searchButton {
+    height: 100%;
+    width: 60%;
+    padding: 0px;
+    border: 5px solid orangered;
+    font-size: 20px;
+    background-color: orangered;
+    color: white;
+}
+
+#searchButton:hover {
+    border: 5px solid orangered;
+    background-color: white;
+    color: orangered;
+    cursor: pointer;
+}
+
+.chatRow:nth-of-type(1n) {
+    background-color: burlywood;
+}
+
+.chatRow:nth-of-type(2n) {
+    background-color: beige;
+}
+
+.chatRow {
+    height: 50px;
+    font-size: 24px;
+    max-width: 100%;
+    /* Temporary solution */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    /* Temporary solution */
+}
+
+.optionsButton {
+    font-weight: bold;
+    font-size: 20px;
+    height: 100%;
+    background: none;
+    border: none;
+}
+
+.optionsButton:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.chatName {
+    font-weight: bold;
+}
+
+.chatDate {
+    font-style: italic;
+}

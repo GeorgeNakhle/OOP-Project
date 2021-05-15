@@ -1,0 +1,73 @@
+body {
+    flex-direction: column;
+}
+
+#topPart {
+    width: 100%;
+    text-align: center;
+}
+
+#scroll {
+    overflow-y: scroll;
+}
+
+.chatMessage {
+    list-style: none;
+}
+
+.chatMessage:nth-of-type(1n) {
+    padding-left: 25px;
+}
+
+.chatMessage:nth-of-type(2n) {
+    padding-left: 248px;
+}
+
+.messageContact {
+    font-size: 25px;
+    font-weight: bold;
+    max-width: 200px;
+}
+
+.messageText {
+    font-size: 20px;
+    background-color: teal;
+    color: white;
+    max-width: 200px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.messageDate {
+    font-size: 16px;
+    font-style: italic;
+}
+
+#inputArea {
+    height: 50px;
+    background-color: black;
+}
+
+#inputText {
+    height: 90%;
+    width: 88%;
+    padding: 0px;
+    outline: 0px;
+    font-size: 20px;
+    background-color: beige;
+}
+
+#inputButton {
+    height: 97%;
+    width: 10%;
+    padding: 0px;
+    border: 0px;
+    background-color: teal;
+    color: white;
+}
+
+#inputButton:hover {
+    background-color: white;
+    color: teal;
+    cursor: pointer;
+}

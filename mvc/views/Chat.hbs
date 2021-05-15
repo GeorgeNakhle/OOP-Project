@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,14 +11,31 @@
     {{!-- These scripts should go first --}}
     {{>Scripts}}
     {{>Styles}}
-    
+
     {{!-- Styles specific to this view --}}
     <link rel="stylesheet" href="/css/chat.css">
     {{!-- Scripts specific to this view --}}
     <script src="/js/chat.js"></script>
 </head>
+
 <body>
-    <h2>Stuff from model</h2>
-    <p>{{content}}</p>
+    <div id="topPart">
+        <h2>Chat</h2>
+    </div>
+    <div id="scroll">
+        {{#each messages}}
+        <ul class="chatMessage">
+            <li class="messageContact">{{contact}}</li>
+            <li class="messageText">{{text}}</li>
+            <li class="messageDate">{{date}}</li>
+        </ul>
+        {{/each}}
+    </div>
+
+    <div id="inputArea">
+        <input type="text" id="inputText" name="inputText" placeholder="Enter Text Message">
+        <button id="inputButton" onclick="sendMessage()">➤</button>
+    </div>
 </body>
+
 </html>

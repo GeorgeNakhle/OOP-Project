@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,14 +11,27 @@
     {{!-- These scripts should go first --}}
     {{>Scripts}}
     {{>Styles}}
-    
+
     {{!-- Styles specific to this view --}}
     <link rel="stylesheet" href="/css/chat_list.css">
     {{!-- Scripts specific to this view --}}
     <script src="/js/chat_list.js"></script>
 </head>
+
 <body>
-    <h2>Stuff from model</h2>
-    <p>{{content}}</p>
+    <div id="topPart">
+        <h2>Chat List</h2>
+    </div>
+    <div id="scroll">
+        {{#each chats}}
+        <div class="chatRow">
+            <button class="optionsButton" onclick="openOptions()">⋮</button>
+            <span class="chatName">{{name}}</span>
+            <span> | </span>
+            <span class="chatDate">{{date}}</span>
+        </div>
+        {{/each}}
+    </div>
 </body>
+
 </html>
