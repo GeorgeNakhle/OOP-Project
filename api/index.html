@@ -210,7 +210,23 @@
         
                 <li id="delete-contact">
                     <h2>/api/delete-contact</h2>
-                    <h2>TODO</h2>
+                    <fieldset>
+                        <legend>Body</legend>
+                        <ul>
+                            <h3>currentUserID</h3>
+                            <p>The ID of the user currently logged in</p>
+                            <h3>contactID or contactUsername</h3>
+                            <p>The ID or the username of the user to add to a contact</p>
+                        </ul>
+                    </fieldset>
+        
+                    <fieldset>
+                        <legend>Result on Success</legend>
+                        <ul>
+                            <h3>Nothing</h3>
+                            <p>Nothing is returned to the client</p>
+                        </ul>
+                    </fieldset>
                 </li>
                 
                 <li id="get-chat-list">

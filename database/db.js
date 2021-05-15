@@ -106,4 +106,14 @@ function insert(table, values){
     })
 }
 
-module.exports = {select, insert, count};
+function deleteRow(table, where){
+    return new Promise((resolve, reject) => {
+        const query = `DELETE FROM ${table} WHERE ${where.join(' AND ')};`;
+        _query(query).then(res => {
+            const normed = _normalize(res);
+            resolve(normed);
+        }).catch(reject);
+    })
+}
+
+module.exports = {select, insert, count, delete: deleteRow};
