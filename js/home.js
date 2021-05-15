@@ -1,4 +1,4 @@
-if (!getCookie('username')){
+if (!getCookie('currentUserID')){
     window.location = '/login';
 }
 

@@ -1,7 +1,7 @@
 const db = require(`${process.env.database}/db`);
 
 function doTheThing(request, response){
-    const {userID, contactID} = request.body;
+    const {currentUserID, contactID} = request.body;
 
     const what = [
         'added.id as "userID"', 
@@ -15,7 +15,7 @@ function doTheThing(request, response){
     ];
     const where = [
         `added.id = ${contactID}`, 
-        `cont.added_by = ${userID}`,
+        `cont.added_by = ${currentUserID}`,
         `cont.user_added = ${contactID}`
     ];
 

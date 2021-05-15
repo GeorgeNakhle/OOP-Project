@@ -26,7 +26,7 @@ function verifyUsernamePassword(username, password){
                 }
                 else{
                     db.select(['id', 'username'], ['user'], [`password = '${password}'`]).then(select => {
-                        resolve({code: 200, content: {userID: select[0].id, username: select[0].username}});
+                        resolve({code: 200, content: {currentUserID: select[0].id, currentUsername: select[0].username}});
                     }).catch(err => {
                         console.error(err);
                         reject({code: 500, content: new Error('Failed to get user')});

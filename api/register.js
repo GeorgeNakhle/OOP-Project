@@ -26,7 +26,7 @@ function register(username, password){
                 }
                 else{
                     db.insert('user', {username, password}).then(insert => {
-                        resolve({code: 200, content: {userID: insert.insertId, username}});
+                        resolve({code: 200, content: {currentUserID: insert.insertId, currentUsername: username}});
                     }).catch(err => {
                         console.error(err);
                         reject({code: 500, content: new Error('failed to register user')});
