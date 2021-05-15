@@ -2,6 +2,11 @@ body {
     flex-direction: column;
 }
 
+#topPart {
+    width: 100%;
+    text-align: center;
+}
+
 #scroll {
     overflow-y: scroll;
 }
