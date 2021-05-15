@@ -1,45 +1,42 @@
+const db = require(`${process.env.database}/db`);
+
 function doTheThing(request, response){
     const {username, password} = request.body;
 
-    verifyUsernamePassword(username, password).then(() => {
-        generateToken().then(token => {
-            response.status(200).end(JSON.stringify({token}));
-        }).catch(err => {
-            console.error(err);
-            response.status(500).end(JSON.stringify({error: 'Unexpected server error'}));
-        });
-    }).catch(err => {
-        console.log(err.message);
-        response.status(400).end(JSON.stringify({error: err.message}));
+    verifyUsernamePassword(username, password).then(resolved => {
+        response.status(resolved.code).end(JSON.stringify(resolved.content));
+    }).catch(rejected => {
+        console.log(rejected.content.message);
+        response.status(rejected.code).end(JSON.stringify({error: rejected.content.message}));
     });
 }
 
-function verifyUsernamePassword(u, p){
-    const validUsers = {
-        'user': 'pass',
-        'test': 'pass',
-        'reee': 'eeer'
-    }
-    
+function verifyUsernamePassword(username, password){
     return new Promise((resolve, reject) => {
-        if (!u){
-            reject(new Error('invalid username'));
+        if (!username){
+            reject({code: 400, content: new Error('invalid username')});
         }
-        else if (!p){
-            reject(new Error('invalid password'));
-        }
-        else if (validUsers[u] !== p){
-            reject(new Error('wrong username or password'));
+        else if (!password){
+            reject({code: 400, content: new Error('invalid password')});
         }
         else{
-            resolve();
+            db.count(['user'], [`password = '${password}'`]).then(count => {
+                if (count == 0){
+                    reject({code: 400, content: new Error('invalid username or password')});
+                }
+                else{
+                    db.select(['id', 'username'], ['user'], [`password = '${password}'`]).then(select => {
+                        resolve({code: 200, content: {userID: select[0].id, username: select[0].username}});
+                    }).catch(err => {
+                        console.error(err);
+                        reject({code: 500, content: new Error('Failed to get user')});
+                    })
+                }
+            }).catch(err => {
+                console.error(err);
+                reject({code: 500, content: new Error('Failed to count users')});
+            });
         }
-    })
-}
-
-function generateToken(){
-    return new Promise(resolve => {
-        resolve('ersghnwogwahngwaegnweg');
     })
 }
 

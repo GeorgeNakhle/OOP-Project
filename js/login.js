@@ -1,4 +1,4 @@
-if (getCookie('token')){
+if (getCookie('username')){
     alert(`Already logged in as ${getCookie('username')}!`);
     window.location = '/home';
 }
@@ -15,8 +15,8 @@ function onSubmit(){
     }
     else{
         fetchAPI('login', {username, password}).then(res => {
-            setCookie('token', res.token);
-            setCookie('username', username);
+            setCookie('userID', res.userID);
+            setCookie('username', res.username);
 
             window.location = '/home';
         }).catch(err => {
