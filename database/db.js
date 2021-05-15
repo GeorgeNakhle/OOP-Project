@@ -116,4 +116,27 @@ function deleteRow(table, where){
     })
 }
 
-module.exports = {select, insert, count, delete: deleteRow};
+function update(table, values, where){
+    return new Promise((resolve, reject) => {
+        const set = [];
+
+        for (const key in values){
+            const val = values[key];
+
+            if (typeof val == typeof 'string'){
+                set.push(`${key} = '${val}'`);
+            }
+            else{
+                set.push(`${key} = ${val}`);
+            }
+        }
+
+        const query = `UPDATE ${table} SET ${set.join(',')} WHERE ${where.join(' AND ')};`;
+        _query(query).then(res => {
+            const normed = _normalize(res);
+            resolve(normed);
+        }).catch(reject);
+    })
+}
+
+module.exports = {select, insert, count, delete: deleteRow, update};
