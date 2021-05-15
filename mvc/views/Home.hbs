@@ -17,7 +17,30 @@
     <script src="/js/home.js"></script>
 </head>
 <body>
-    <h2>Stuff from model</h2>
-    <p>{{content}}</p>
+    <main>
+        <h1>Home</h1>
+        <div id="buttons">
+            <div id="home_nav">
+                <a href="/chat-list">
+                    <input type="button" value="Chat List">
+                </a>
+                
+                <a href="/create-chat">
+                    <input type="button" value="Create a Chat">
+                </a>
+
+                <a href="/search-chat">
+                    <input type="button" value="Search for Chat">
+                </a>
+
+                <a href="/contact-list">
+                    <input type="button" value="Contact List">
+                </a>
+            </div>
+
+
+            <input type="button" value="Log Out" onclick="logout();">
+        </div>
+    </main>
 </body>
 </html>
