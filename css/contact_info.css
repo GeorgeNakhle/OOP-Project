@@ -1,0 +1,53 @@
+#nickname-textarea {
+    resize: none;
+    line-height: 0.9;
+    text-align: center;
+    padding-top: 11px;
+    
+}
+
+h3 {
+    margin-bottom: 12px;
+}
+
+#username {
+    font-weight: bold;
+    resize: none;
+    line-height: 0.9;
+    text-align: center;
+    padding-top: 11px;
+
+}
+#notes-textarea {
+    height: 200px;
+    resize: none;
+}
+
+#save-delete-buttons {
+    padding-top: 30px;
+}
+
+#save-delete-buttons button {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: 800;
+    height: 30px;
+}
+
+#save-button {
+    background-color: green;
+    width: 100px;
+}
+
+#delete-button {
+    background-color: red;
+    width: 75px;
+}
+
+main {
+    width: 300px;
+}
+body {
+    text-align: center;
+}
+
