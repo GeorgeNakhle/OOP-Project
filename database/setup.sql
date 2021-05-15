@@ -36,6 +36,8 @@ CREATE TABLE `message`(
 CREATE TABLE `contact`(
     `added_by` INT NOT NULL,
     `user_added` INT NOT NULL,
+    `nickname` VARCHAR(20) DEFAULT NULL,
+    `notes` VARCHAR(255) DEFAULT NULL,
 
     PRIMARY KEY (`added_by`, `user_added`),
     FOREIGN KEY (`added_by`) REFERENCES `user`(`id`),

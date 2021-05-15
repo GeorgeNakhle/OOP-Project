@@ -10,10 +10,10 @@ INSERT INTO `chat`(`id`, `chatname`) VALUES
     (2, 'rat'),
     (3, 'bat');
 
-INSERT INTO `contact`(`added_by`, `user_added`) VALUES
-    (1, 2),
-    (2, 1),
-    (2, 3);
+INSERT INTO `contact`(`added_by`, `user_added`, `nickname`, `notes`) VALUES
+    (1, 2, null, null),
+    (2, 1, 'toni', null),
+    (2, 3, 'bugg', 'eats bugs');
 
 INSERT INTO `chat_member`(`user_id`, `chat_id`) VALUES 
     (1, 1),
