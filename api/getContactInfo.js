@@ -1,46 +1,83 @@
 const db = require(`${process.env.database}/db`);
+const helper = require(`${process.env.api}/helper`);
 
-async function doTheThing(request, response){
+function http(request, response){
     const {currentUserID, contactID, contactUsername} = request.body;
 
-    let user_added = null;
-
     if (contactID){
-        user_added = contactID;
+        modelByUserID(currentUserID, contactID).then(res => {
+            response.status(200).end(JSON.stringify(res));
+        }).catch(err => {
+            console.error(err);
+            response.status(500).end();
+        })
     }
     else{
-        try {
-            await db.select(['id'], ['user'], [`username = '${contactUsername}'`]).then(res => {
-                user_added = res[0].id;
-            })
-        } catch (error) {
-            console.error(error);
-            return response.status(500).end({error: error.message});
-        }
-    }
-
-    const what = [
-        'added.id as "userID"', 
-        'added.username as "username"', 
-        'cont.nickname as "nickname"', 
-        'cont.notes as "notes"'
-    ];
-    const from = [
-        'user added',
-        'contact cont'
-    ];
-    const where = [
-        `added.id = ${user_added}`, 
-        `cont.added_by = ${currentUserID}`,
-        `cont.user_added = ${user_added}`
-    ];
-
-    db.select(what, from, where, true).then(contact => {
-        response.status(200).end(JSON.stringify(contact[0]));
-    }).catch(err => {
-        console.error(err);
-        response.status(500).end(JSON.stringify({error: err.message}));
-    });
+        modelByUsername(currentUserID, contactUsername).then(res => {
+            response.status(200).end(JSON.stringify(res));
+        }).catch(err => {
+            console.error(err);
+            response.status(500).end();
+        })
+    };
 }
 
-module.exports = doTheThing;
+function modelByUsername(currentUserID, contactUsername){
+    return new Promise((resolve, reject) => {
+        if (!contactUsername){
+            resolve({success: false, message: 'No contact username provided!'});
+        }
+        else{
+            helper.checkIfUsernameExists(contactUsername).then(exists => {
+                if (!exists){
+                    resolve({success: false, message: 'Contact username does not exist!'})
+                }
+                else{
+                    helper.usernameToUserID(contactUsername).then(contactID => {
+                        modelByUserID(currentUserID, contactID).then(resolve).catch(reject);
+                    }).catch(reject);
+                }
+            }).catch(reject);
+        }
+    })
+}
+
+function modelByUserID(currentUserID, contactID){
+    return new Promise((resolve, reject) => {
+        if (!currentUserID){
+            resolve({success: false, message: 'No currentUserID provided!'});
+        }
+        else if (!contactID){
+            resolve({success: false, message: 'No contact username provided!'});
+        }
+        else{
+            const what = [
+                'added.id as "userID"', 
+                'added.username as "username"', 
+                'cont.nickname as "nickname"', 
+                'cont.notes as "notes"'
+            ];
+            const from = [
+                'user added',
+                'contact cont'
+            ];
+            const where = [
+                `added.id = ${contactID}`, 
+                `cont.added_by = ${currentUserID}`,
+                `cont.user_added = ${contactID}`
+            ];
+        
+            db.select(what, from, where, true).then(contacts => {
+                if (contacts.length == 0){
+                    resolve({success: false, message: 'Contact does not exist!'});
+                }
+                else{
+                    console.log(contact[0]);
+                    resolve({success: true, contact: contacts[0]});
+                }
+            }).catch(reject);
+        }
+    })
+}
+
+module.exports = {http, modelByUsername, modelByUserID};

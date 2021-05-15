@@ -10,7 +10,7 @@ function connect(){
         });
         con.connect(err => {
             if (err){
-                return reject(err);
+                reject(err);
             }
             else{
                 con.query('USE `chats_db`', err => {
@@ -52,7 +52,7 @@ function _query(query){
                 if (error) reject(error);
                 else resolve(results);
             });
-        })
+        }).catch(reject);
     })
 }
 
