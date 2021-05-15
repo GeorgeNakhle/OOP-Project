@@ -1,7 +1,23 @@
 const db = require(`${process.env.database}/db`);
 
-function doTheThing(request, response){
-    const {currentUserID, contactID} = request.body;
+async function doTheThing(request, response){
+    const {currentUserID, contactID, contactUsername} = request.body;
+
+    let user_added = null;
+
+    if (contactID){
+        user_added = contactID;
+    }
+    else{
+        try {
+            await db.select(['id'], ['user'], [`username = '${contactUsername}'`]).then(res => {
+                user_added = res[0].id;
+            })
+        } catch (error) {
+            console.error(error);
+            return response.status(500).end({error: error.message});
+        }
+    }
 
     const what = [
         'added.id as "userID"', 
@@ -14,9 +30,9 @@ function doTheThing(request, response){
         'contact cont'
     ];
     const where = [
-        `added.id = ${contactID}`, 
+        `added.id = ${user_added}`, 
         `cont.added_by = ${currentUserID}`,
-        `cont.user_added = ${contactID}`
+        `cont.user_added = ${user_added}`
     ];
 
     db.select(what, from, where, true).then(contact => {
