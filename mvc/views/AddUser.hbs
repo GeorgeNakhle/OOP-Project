@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,14 +11,46 @@
     {{!-- These scripts should go first --}}
     {{>Scripts}}
     {{>Styles}}
-    
+
     {{!-- Styles specific to this view --}}
     <link rel="stylesheet" href="/css/add_user.css">
     {{!-- Scripts specific to this view --}}
     <script src="/js/add_user.js"></script>
 </head>
+
 <body>
-    <h2>Stuff from model</h2>
-    <p>{{content}}</p>
+    <div id="topPart">
+        <h2>Add User</h2>
+        <div class="inputArea">
+            <input type="text" id="addUsername" name="addUsername" placeholder="Add by Username">
+            <button id="addUsernameButton" onclick="addUsername()">Add Username</button>
+        </div>
+        <h2>Added Users</h2>
+    </div>
+    <div id="scroll">
+        {{#each addedContacts}}
+        <div class="contactRow">
+            <span class="username">{{username}}</span>
+            <button class="removeButton" onclick="removeUser()">—</button>
+        </div>
+        {{/each}}
+    </div>
+    <div id="topPart">
+        <h2>Add from Contacts</h2>
+    </div>
+    <div id="scroll">
+        {{#each contactsList}}
+        <div class="contactRow">
+            <span class="username">{{username}}</span>
+            <button class="addButton" onclick="addContact()">+</button>
+        </div>
+        {{/each}}
+    </div>
+    <div id="topPart">
+        <div class="inputArea">
+            <button id="createChatButton" onclick="addUsers()">Add User(s)</button>
+        </div>
+    </div>
 </body>
+
 </html>
