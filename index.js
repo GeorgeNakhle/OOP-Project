@@ -17,6 +17,11 @@ process.env.scripts = path.resolve(projectRoot, 'js');
 process.env.api = path.resolve(projectRoot, 'api');
 // Classes stuff
 process.env.classes = path.resolve(projectRoot, 'classes');
+// Database stuff
+process.env.database_host = 'net.tonyvas.top';
+process.env.database_port = 6969;
+process.env.database_user = 'chats_user';
+process.env.database_password = 'Potato123';
 
 // Partial view renderer
 const {registerPartialTemplate} = require(`${process.env.controllers}/HandlebarsHelper`);
