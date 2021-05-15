@@ -1,43 +1,38 @@
 const db = require(`${process.env.database}/db`);
+const helper = require(`${process.env.api}/helper`);
 
-function doTheThing(request, response){
+function http(request, response){
     const {username, password} = request.body;
 
-    verifyUsernamePassword(username, password).then(resolved => {
-        response.status(resolved.code).end(JSON.stringify(resolved.content));
-    }).catch(rejected => {
-        console.log(rejected.content.message);
-        response.status(rejected.code).end(JSON.stringify({error: rejected.content.message}));
+    model(username, password).then(res => {
+        response.status(200).end(JSON.stringify(res));
+    }).catch(err => {
+        console.error(err);
+        response.status(500).end();
     });
 }
 
-function verifyUsernamePassword(username, password){
+function model(username, password){
     return new Promise((resolve, reject) => {
         if (!username){
-            reject({code: 400, content: new Error('invalid username')});
+            resolve({success: false, message: 'No username provided!'});
         }
         else if (!password){
-            reject({code: 400, content: new Error('invalid password')});
+            resolve({success: false, message: 'No password provided!'});
         }
         else{
-            db.count(['user'], [`password = '${password}'`]).then(count => {
+            db.count(['user'], [`password = '${password}'`, `username = '${username}'`]).then(count => {
                 if (count == 0){
-                    reject({code: 400, content: new Error('invalid username or password')});
+                    resolve({success: false, message: 'Invalid username or password!'});
                 }
                 else{
                     db.select(['id', 'username'], ['user'], [`password = '${password}'`]).then(select => {
-                        resolve({code: 200, content: {currentUserID: select[0].id, currentUsername: select[0].username}});
-                    }).catch(err => {
-                        console.error(err);
-                        reject({code: 500, content: new Error('Failed to get user')});
-                    })
+                        resolve({success: true, currentUserID: select[0].id, currentUsername: select[0].username});
+                    }).catch(reject)
                 }
-            }).catch(err => {
-                console.error(err);
-                reject({code: 500, content: new Error('Failed to count users')});
-            });
+            }).catch(reject);
         }
     })
 }
 
-module.exports = doTheThing;
+module.exports = {http, model};

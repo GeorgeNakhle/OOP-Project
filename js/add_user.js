@@ -2,14 +2,14 @@ function addUsername() {
     alert("add username");
 }
 
-function removeContact() {
-    alert("remove contact");
+function removeUser() {
+    alert("remove user");
 }
 
 function addContact() {
     alert("add contact");
 }
 
-function createChat() {
-    alert("create chat");
+function addUsers() {
+    alert("add users");
 }
