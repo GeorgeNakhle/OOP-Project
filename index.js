@@ -13,10 +13,17 @@ process.env.controllers = path.resolve(projectRoot, 'mvc', 'controllers');
 // Save other MVC shit in env
 process.env.styles = path.resolve(projectRoot, 'css');
 process.env.scripts = path.resolve(projectRoot, 'js');
+process.env.images = path.resolve(projectRoot, 'img');
 // API stuff
 process.env.api = path.resolve(projectRoot, 'api');
 // Classes stuff
 process.env.classes = path.resolve(projectRoot, 'classes');
+// Database stuff
+process.env.database_host = 'net.tonyvas.top';
+process.env.database_port = 6969;
+process.env.database_user = 'chats_user';
+process.env.database_password = 'Potato123';
+process.env.database = path.resolve(projectRoot, 'database');
 
 // Partial view renderer
 const {registerPartialTemplate} = require(`${process.env.controllers}/HandlebarsHelper`);
@@ -76,6 +83,15 @@ Promise.all(promises).then(() => {
     // Get handlers for JS Scripts
     expressApp.get('/js/:filename', (req, res) => {
         res.sendFile(`${process.env.scripts}/${req.params.filename}`);
+    });
+    // Get handlers for images
+    expressApp.get('/img/:filename', (req, res) => {
+        res.sendFile(`${process.env.images}/${req.params.filename}`);
+    });
+
+    // favicon
+    expressApp.get('/favicon.ico', (req, res) => {
+        res.sendFile(`${process.env.images}/favicon.ico`);
     });
 
     // Post handlers for API

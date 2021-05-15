@@ -1,0 +1,102 @@
+body {
+    flex-direction: column;
+}
+
+#scroll {
+    overflow-y: scroll;
+}
+
+#topPart {
+    width: 100%;
+    text-align: center;
+}
+
+#inputArea {
+    height: 50px;
+    padding-bottom: 100px;
+    align-items: center;
+    align-content: center;
+}
+
+#addUsername {
+    height: 100%;
+    width: 60%;
+    padding: 0px;
+    margin-bottom: 10px;
+    outline: 0px;
+    font-size: 20px;
+    background-color: beige;
+}
+
+#addUsernameButton {
+    height: 100%;
+    width: 60%;
+    padding: 0px;
+    border: 5px solid green;
+    font-size: 20px;
+    background-color: green;
+    color: white;
+}
+
+#addUsernameButton:hover {
+    border: 5px solid green;
+    background-color: white;
+    color: green;
+    cursor: pointer;
+}
+
+.contactRow:nth-of-type(1n) {
+    background-color: burlywood;
+}
+
+.contactRow:nth-of-type(2n) {
+    background-color: beige;
+}
+
+.contactRow {
+    height: 50px;
+    font-size: 24px;
+    max-width: 100%;
+    /* Temporary solution */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    /* Temporary solution */
+}
+
+.removeButton, .addButton {
+    font-weight: bold;
+    font-size: 20px;
+    height: 100%;
+    border: none;
+    width: 40px;
+    float: right;
+}
+
+.removeButton {
+    background-color: red;
+    color: white;
+}
+
+.addButton {
+    background-color: green;
+    color: white;
+}
+
+.removeButton:hover, .addButton:hover {
+    cursor: pointer;
+}
+
+.removeButton:hover {
+    background-color: white;
+    color: red;
+}
+
+.addButton:hover {
+    background-color: white;
+    color: green;
+}
+
+.username {
+    font-weight: bold;
+}
