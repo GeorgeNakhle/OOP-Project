@@ -10,20 +10,22 @@ const socket = io();
  */
 function fetchAPI(endpoint, data){
     return new Promise((resolve, reject) => {
-        fetch(`/api/${endpoint}`, {
+        const settings = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
-        }).then(res => {
-            res.json().then(json => {
-                if (res.status == 200){
-                    resolve(json);
-                }
-                else{
-                    reject(new Error(json.error));
-                }
-            })
-        }).catch(reject);
+        };
+
+        fetch(`/api/${endpoint}`, settings).then(res => {
+            if (res.status == 200){
+                res.json().then(resolve).catch(() => {
+                    reject(new Error('Failed parsing response!'));
+                });
+            }
+            else{
+                reject(new Error('Unknown error!'));
+            }
+        });
     })
 }
 
