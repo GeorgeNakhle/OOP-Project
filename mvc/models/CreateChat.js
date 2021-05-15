@@ -1,11 +1,59 @@
-function doStuff(request){
+function doStuff(request) {
     return new Promise((resolve, reject) => {
+
+        let addedContacts = [
+            {
+                username: "Johnny Sins"
+            },
+            {
+                username: "Johnny Sins"
+            },
+            {
+                username: "Johnny Sins"
+            },
+            {
+                username: "Johnny Sins"
+            },
+            {
+                username: "Johnny Sins"
+            },
+            {
+                username: "Johnny Sins"
+            },
+            {
+                username: "Johnny Sins"
+            }
+        ];
+
+        let contactsList = [
+            {
+                username: "Meg Thomas"
+            },
+            {
+                username: "Meg Thomas"
+            },
+            {
+                username: "Meg Thomas"
+            },
+            {
+                username: "Meg Thomas"
+            },
+            {
+                username: "Meg Thomas"
+            },
+            {
+                username: "Meg Thomas"
+            }
+        ];
+
         resolve({
             content: "this is some example content from the CreateChat model",
+            addedContacts: addedContacts,
+            contactsList: contactsList
         })
     });
 }
 
 
 
-module.exports = {doStuff};
+module.exports = { doStuff };

@@ -20,7 +20,7 @@ body {
 }
 
 .chatMessage:nth-of-type(2n) {
-    padding-left: 258px;
+    padding-left: 248px;
 }
 
 .messageContact {
@@ -35,6 +35,7 @@ body {
     color: white;
     max-width: 200px;
     border-radius: 5px;
+    padding: 10px;
 }
 
 .messageDate {
