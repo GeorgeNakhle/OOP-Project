@@ -22,6 +22,7 @@ process.env.database_host = 'net.tonyvas.top';
 process.env.database_port = 6969;
 process.env.database_user = 'chats_user';
 process.env.database_password = 'Potato123';
+process.env.database = path.resolve(projectRoot, 'database');
 
 // Partial view renderer
 const {registerPartialTemplate} = require(`${process.env.controllers}/HandlebarsHelper`);
