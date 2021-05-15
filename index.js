@@ -94,6 +94,10 @@ Promise.all(promises).then(() => {
         res.sendFile(`${process.env.images}/favicon.ico`);
     });
 
+    // Get handler for API documentation
+    expressApp.get('/api', (request, response) => {
+        response.sendFile(`${process.env.api}/index.html`);
+    })
     // Post handlers for API
     expressApp.use('/api', require(`${process.env.api}/controller.js`))
 
