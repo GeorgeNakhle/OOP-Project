@@ -13,45 +13,46 @@ function connect(){
                 return reject(err);
             }
             else{
-                resolve(con);
+                con.query('USE `chats_db`', err => {
+                    if (err){
+                        reject(err);
+                    }
+                    else{
+                        resolve(con);
+                    }
+                });
             }
         })
     });
 }
 
-function _query(query){
+function _normalize(rowDataPacket){
+    const normed = {};
+    for (const key in rowDataPacket){
+        normed[key] = rowDataPacket[key];
+    }
+    return normed;
+}
+
+function _normalizeMany(rowDataPackets){
+    const normed = [];
+    for (const packet of rowDataPackets){
+        normed.push(_normalize(packet));
+    }
+    return normed;
+}
+
+function query(query){
     return new Promise((resolve, reject) => {
         connect().then(con => {
             con.query(query, (error, results) => {
                 con.end();
 
                 if (error) reject(error);
-                else resolve(results);
+                else resolve(_normalize(results));
             });
         })
     })
 }
 
-function _getUserIDFromUsername(username){
-    return new Promise((resolve, reject) => {
-        // _query(`SELECT id FROM user WHERE user.username = '${username}'`).then(res => {
-        //     console.log(res);
-        // }).catch(reject);
-    });
-}
-
-function getEverythingForUserByUsername(username){
-    return new Promise((resolve, reject) => {
-        // _getUserIDFromUsername(username).then(id => {
-        //     getEverythingForUserByUserID(id).then(resolve).catch(reject);
-        // }).catch(reject);
-    });
-}
-
-function getEverythingForUserByUserID(userID){
-    return new Promise((resolve, reject) => {
-
-    });
-}
-
-module.exports = {getEverythingForUserByUsername, getEverythingForUserByUserID};
+module.exports = {query};
