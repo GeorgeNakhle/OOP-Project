@@ -35,7 +35,6 @@ function _normalize(rowDataPacket){
 }
 
 function _normalizeMany(rowDataPackets){
-    console.log(rowDataPackets);
     const normed = [];
     for (const packet of rowDataPackets){
         normed.push(_normalize(packet));
@@ -46,6 +45,7 @@ function _normalizeMany(rowDataPackets){
 function _query(query){
     return new Promise((resolve, reject) => {
         connect().then(con => {
+            console.log(query);
             con.query(query, (error, results) => {
                 con.end();
 
@@ -65,12 +65,12 @@ function count(from, where){
     })
 }
 
-function select(what, from, where){
+function select(what, from, where, allow_empty = false){
     return new Promise((resolve, reject) => {
         let query = `SELECT ${what.join(', ')} FROM ${from.join(', ')} WHERE ${where.join(' AND ')}`;
         _query(query).then(res => {
             const normed = _normalizeMany(res);
-            if (normed.length == 0){
+            if (normed.length == 0 && !allow_empty){
                 reject(new Error('select query resulted empty'));
             }
             else{
