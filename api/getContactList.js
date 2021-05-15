@@ -3,7 +3,21 @@ const db = require(`${process.env.database}/db`);
 function doTheThing(request, response){
     const id = request.body.userID;
 
-    db.select(['added.id as "userID"', 'added.username as "username"', 'cont.nickname as "nickname"'], ['user added', 'contact cont'], ['added.id = cont.user_added', `cont.added_by = ${id}`], true).then(contacts => {
+    const what = [
+        'added.id as "userID"', 
+        'added.username as "username"', 
+        'cont.nickname as "nickname"'
+    ];
+    const from = [
+        'user added', 
+        'contact cont'
+    ];
+    const where = [
+        'added.id = cont.user_added', 
+        `cont.added_by = ${id}`
+    ];
+
+    db.select(what, from, where, true).then(contacts => {
         response.status(200).end(JSON.stringify(contacts));
     }).catch(err => {
         console.error(err);
