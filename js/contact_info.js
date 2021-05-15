@@ -1,3 +1,5 @@
+const currentUserID = getCookie('currentUserID');
+
 function editContact(){
     let username = document.getElementById("username").value;
     let nickname = document.getElementById("nickname-textarea").value;
