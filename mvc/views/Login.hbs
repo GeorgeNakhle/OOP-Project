@@ -17,7 +17,25 @@
     <script src="/js/login.js"></script>
 </head>
 <body>
-    <h2>Stuff from model</h2>
-    <p>{{content}}</p>
+    <main>
+        <img src="https://timesofindia.indiatimes.com/photo/67586673.cms" alt="logo" width="300px">
+
+        <form>
+            <div class="form_item">
+                <span>Username</span>
+                <input type="text" id="username" autocomplete="off">
+            </div>
+
+            <div class="form_item">
+                <span>Password</span>
+                <input type="password" id="password">
+            </div>
+
+            <div class="buttons">
+                <input class="button" type="button" value="Login" onclick="onSubmit();">
+                <input class="button" type="button" value="Register" onclick="goRegister();">
+            </div>
+        </form>
+    </main>
 </body>
 </html>

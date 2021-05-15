@@ -17,7 +17,27 @@
     <script src="/js/register.js"></script>
 </head>
 <body>
-    <h2>Stuff from model</h2>
-    <p>{{content}}</p>
+    <main>
+        <form>
+            <div class="form_item">
+                <span>Username</span>
+                <input type="text" id="username" autocomplete="off">
+            </div>
+
+            <div class="form_item">
+                <span>Password</span>
+                <input type="password" class="password">
+            </div>
+
+            <div class="form_item">
+                <span>Confirm Password</span>
+                <input type="password" class="password">
+            </div>
+
+            <div class="buttons">
+                <input class="button" type="button" value="Register" onclick="onSubmit();">
+            </div>
+        </form>
+    </main>
 </body>
 </html>
