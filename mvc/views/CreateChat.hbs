@@ -21,7 +21,7 @@
 <body>
     <div id="topPart">
         <h2>Create a Chat</h2>
-        <div id="inputArea">
+        <div class="inputArea">
             <input type="text" id="addUsername" name="addUsername" placeholder="Add by Username">
             <button id="addUsernameButton" onclick="addUsername()">Add User</button>
         </div>
@@ -45,6 +45,11 @@
             <button class="addButton" onclick="addContact()">+</button>
         </div>
         {{/each}}
+    </div>
+    <div id="topPart">
+        <div class="inputArea">
+            <button id="createChatButton" onclick="createChat()">Create Chat</button>
+        </div>
     </div>
 </body>
 
