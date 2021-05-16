@@ -3,6 +3,10 @@ const express = require('express');
 const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+
+// Load .env file
+dotenv.config('.env');
 
 // Get the project root path
 const projectRoot = path.dirname(require.main.filename);
@@ -18,11 +22,6 @@ process.env.scripts = path.resolve(projectRoot, 'js');
 process.env.images = path.resolve(projectRoot, 'img');
 // Save API path in env
 process.env.api = path.resolve(projectRoot, 'api');
-// Database connection stuff
-process.env.database_host = 'net.tonyvas.top';
-process.env.database_port = 6969;
-process.env.database_user = 'chats_user';
-process.env.database_password = 'Potato123';
 // Database path
 process.env.database = path.resolve(projectRoot, 'database');
 // SocketIO path
@@ -31,8 +30,13 @@ process.env.socketio = path.resolve(projectRoot, 'socketio');
 // Partial view renderer
 const { registerPartialTemplate } = require(`${process.env.controllers}/HandlebarsHelper`);
 
+// Database connection stuff
+process.env.database_host = process.env.DATABASE_HOST;
+process.env.database_port = process.env.DATABASE_PORT;
+process.env.database_user = process.env.DATABASE_USER;
+process.env.database_password = process.env.DATABASE_PASSWORD;
 // Port for the back-end to listen on
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 // Partials for views
 const PARTIALS = ['Header', 'Scripts', 'Styles'];
 
