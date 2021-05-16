@@ -2,8 +2,12 @@ if (!location.search.includes('currentUserID')) {
     window.location = `${window.location}?currentUserID=${getCookie('currentUserID')}`;
 }
 else{
+    // (Antony)
+    // Loop over each key value param in the URL
     for (const kv of location.search.substr(1).split('&')){
+        // If key is for the chat ID
         if (kv.split('=')[0] == 'id'){
+            // Send a hello to the socket server containing the current user ID, current username, and currently open chat ID
             socket.emit('hello', {userID: getCookie('currentUserID'), chatID: kv.split('=')[1], username: getCookie('currentUsername')});
         }
     }
@@ -11,27 +15,36 @@ else{
 
 // Refresh page when message is received
 socket.on("message", (data) => {
+    // Get data from the message object
     const {username, content, sentOn} = data;
 
+    // Create message container
     const ul = document.createElement('ul');
+    // Create inner HTML elements
     const liUsername = document.createElement('li');
     const liContent = document.createElement('li');
     const liDate = document.createElement('li');
 
+    // Add the classes to the elements
     ul.classList.add('chatMessage');
     liUsername.classList.add('messageContact');
     liContent.classList.add('messageText')
     liDate.classList.add('messageDate')
 
+    // Add the test content to the elements
     liUsername.innerHTML = username;
     liContent.innerHTML = content;
+    // Convert timestamp to string date
     liDate.innerHTML = new Date(sentOn).toLocaleString();
 
+    // Append inner elements to container
     ul.appendChild(liUsername)
     ul.appendChild(liContent)
     ul.appendChild(liDate);
+    // Append message element to bottom of scroll element
     document.getElementById('scroll').appendChild(ul);
 
+    // Scroll down the list
     scrollDown();
 })
 
