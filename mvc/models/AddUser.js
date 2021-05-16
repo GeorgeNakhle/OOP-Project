@@ -4,7 +4,7 @@ const getContactList = require(`${process.env.api}/getContactList`).model
 function doStuff(request) {
     return new Promise((resolve, reject) => {
 
-        let currentChatID = 1 //request.query.chatid
+        let currentChatID = 1 //request.query.id
         let currentUserID = 6 //request.query.currentUserID;
         let contacts = [];
         let addedContacts = [];
