@@ -1,4 +1,3 @@
-const Contact = require('../../classes/Contact');
 const getChatMessages = require(`${process.env.api}/getChatMessages`).model
 
 function doStuff(request) {

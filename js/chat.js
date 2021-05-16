@@ -45,12 +45,16 @@ function scrollDown(){
     div.scrollTop = div.scrollHeight - div.clientHeight;
 }
 
+// Takes a chatID and opens the Add User page for the chat
 function addUser(id) {
     window.location = `/add-user?id=${id}&currentUserID=${getCookie('currentUserID')}`;
 }
 
 function sendMessage(chatname) {
+    // Get the text from inputText
     let inputText = document.getElementById("inputText").value;
+
+    // JS alert is text field is empty
     if (inputText == "" || inputText == null) {
         alert("ERROR: Can't send empty text message.");
     } else {

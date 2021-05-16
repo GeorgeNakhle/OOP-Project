@@ -13,9 +13,13 @@ body {
     height: 100%;
 }
 
+/* Change row color if ODD number */
+
 .chatRow:nth-of-type(1n) {
     background-color: burlywood;
 }
+
+/* Change row color if EVEN number */
 
 .chatRow:nth-of-type(2n) {
     background-color: beige;
@@ -25,11 +29,9 @@ body {
     height: 50px;
     font-size: 24px;
     max-width: 100%;
-    /* Temporary solution */
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    /* Temporary solution */
 }
 
 .optionsButton {

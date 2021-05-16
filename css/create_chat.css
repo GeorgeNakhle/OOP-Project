@@ -49,9 +49,13 @@ body {
     cursor: pointer;
 }
 
+/* Change row colors for ODD numbers */
+
 .contactRow:nth-of-type(1n) {
     background-color: burlywood;
 }
+
+/* Change row colors for EVEN numbers */
 
 .contactRow:nth-of-type(2n) {
     background-color: beige;

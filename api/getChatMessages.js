@@ -10,12 +10,14 @@ function http(request, response) {
     })
 }
 
+// Pass in currently chosen chatID
 function model(chatID) {
     return new Promise((resolve, reject) => {
         if (!chatID) {
             resolve({ success: false, message: 'No currentUserID provided!' });
         }
         else {
+            // SELECT clause
             const what = [
                 'message.id as "messageID"',
                 'chat_id as "chatID"',
@@ -25,18 +27,22 @@ function model(chatID) {
                 'message.sent_on as "timestamp"',
                 'chat.chatname as "chatname"',
             ];
+            // FROM clause
             const from = [
                 'user',
                 'message',
                 'chat'
             ];
+            // WHERE clause
             const where = [
                 `${chatID} = message.chat_id`,
                 `${chatID} = chat.id`,
                 `user.id = message.user_id`
             ];
 
+            // Execute query
             db.select(what, from, where, true).then(messages => {
+                // Return all messages
                 resolve({ success: true, messages });
             }).catch(reject);
         }
