@@ -23,4 +23,27 @@ function checkIfUsernameExists(username){
     })
 }
 
-module.exports = {usernameToUserID, checkIfUsernameExists};
+function chatnameToChatID(chatname){
+    return new Promise((resolve, reject) => {
+        checkIfChatnameExists(chatname).then(exists => {
+            if (exists){
+                db.select(['id'], ['chat'], [`chatname = '${chatname}'`], true).then(res => {
+                    resolve(res[0].id);
+                }).catch(reject);
+            }
+            else{
+                reject(new Error('chatname does not exist'));
+            }
+        }).catch(reject);
+    })
+}
+
+function checkIfChatnameExists(chatname){
+    return new Promise((resolve, reject) => {
+        db.count(['chat'], [`chatname = '${chatname}'`]).then(count => {
+            resolve(count > 0);
+        }).catch(reject);
+    })
+}
+
+module.exports = {usernameToUserID, checkIfUsernameExists, chatnameToChatID, checkIfChatnameExists};
