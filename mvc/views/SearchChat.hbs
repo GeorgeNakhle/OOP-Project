@@ -22,7 +22,7 @@
     {{>Header title="Search for Chat" backPath="/home"}}
     <div id="topPart">
         <div id="inputArea">
-            <input type="text" id="searchText" name="searchText" placeholder="Search for Chat">
+            <input type="text" id="searchText" name="searchText" value="{{searched}}" placeholder="Search for Chat">
             <button id="searchButton" onclick="searchChat()">Search</button>
         </div>
         <h2>Results</h2>
@@ -31,9 +31,9 @@
         {{#each chats}}
         <div class="chatRow">
             <button class="optionsButton" onclick="openOptions()">⋮</button>
-            <span class="chatName">{{name}}</span>
-            <span> | </span>
-            <span class="chatDate">{{date}}</span>
+            <span onclick="joinChat('{{this.id}}')" class="chatName">{{this.chatname}}</span>
+            {{!-- <span> | </span>
+            <span class="chatDate">{{date}}</span> --}}
         </div>
         {{/each}}
     </div>
