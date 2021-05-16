@@ -12,8 +12,19 @@ function http(request, response){
     });
 }
 
+/**
+ * Model for registering
+ * Takes the username and password of the user to create
+ * 
+ * Resolves with a success flag, or rejects with an error.
+ * If success
+ *      {success: bool, currentUserID: int, currentUsername: string}
+ * Else
+ *      {success: bool, message: string}
+ */
 function model(username, password){   
     return new Promise((resolve, reject) => {
+        // Check if values are set
         if (!username){
             resolve({success: false, message: 'No username provided!'});
         }
@@ -21,11 +32,13 @@ function model(username, password){
             resolve({success: false, message: 'No password provided!'});
         }
         else{
+            // Check if username already exists
             helper.checkIfUsernameExists(username).then(exists => {
                 if (exists){
                     resolve({success: false, message: 'Username already exists!'});
                 }
                 else{
+                    // Create user and resolve
                     db.insert('user', {username, password}).then(insert => {
                         resolve({success: true, currentUserID: insert.insertId, currentUsername: username});
                     }).catch(reject);

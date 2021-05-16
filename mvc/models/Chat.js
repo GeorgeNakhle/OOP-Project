@@ -1,17 +1,6 @@
 const Contact = require('../../classes/Contact');
 const getChatMessages = require(`${process.env.api}/getChatMessages`).model
 
-function timeFormatter(milliseconds) {
-    var date = new Date(milliseconds);
-    return date.getFullYear() +
-        "/" + (date.getMonth() + 1) +
-        "/" + date.getDate() +
-        " " + date.getHours() +
-        ":" + date.getMinutes() +
-        ":" + date.getSeconds();
-
-}
-
 function doStuff(request) {
     let messages = [];
     return new Promise((resolve, reject) => {
@@ -25,7 +14,7 @@ function doStuff(request) {
                     // Convert UNIX timestamp to Date
                     // Add field if message ID == current user ID
                     for (i = 0; i < messages.length; i++) {
-                        messages[i].timestamp = timeFormatter(messages[i].timestamp);
+                        messages[i].timestamp = new Date(messages[i].timestamp).toLocaleString();;
 
                         if (messages[i].userID == currentUserID) {
                             messages[i].isCurrent = true;
