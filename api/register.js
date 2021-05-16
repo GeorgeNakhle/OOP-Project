@@ -1,43 +1,38 @@
 const db = require(`${process.env.database}/db`);
+const helper = require(`${process.env.api}/helper`);
 
-function doTheThing(request, response){
+function http(request, response){
     const {username, password} = request.body;
 
-    register(username, password).then(resolved => {
-        response.status(resolved.code).end(JSON.stringify(resolved.content));
-    }).catch(rejected => {
-        console.error(rejected.content.message);
-        response.status(rejected.code).end(JSON.stringify({error: rejected.content.message}));
+    model(username, password).then(res => {
+        response.status(200).end(JSON.stringify(res));
+    }).catch(err => {
+        console.error(err);
+        response.status(500).end();
     });
 }
 
-function register(username, password){   
+function model(username, password){   
     return new Promise((resolve, reject) => {
         if (!username){
-            reject({code: 400, content: new Error('invalid username')});
+            resolve({success: false, message: 'No username provided!'});
         }
         else if (!password){
-            reject({code: 400, content: new Error('invalid password')});
+            resolve({success: false, message: 'No password provided!'});
         }
         else{
-            db.count(['user'], [`user.username = '${username}'`]).then(count => {
-                if (count > 0){
-                    reject({code: 400, content: new Error('username already in use')});
+            helper.checkIfUsernameExists(username).then(exists => {
+                if (exists){
+                    resolve({success: false, message: 'Username already exists!'});
                 }
                 else{
                     db.insert('user', {username, password}).then(insert => {
-                        resolve({code: 200, content: {currentUserID: insert.insertId, currentUsername: username}});
-                    }).catch(err => {
-                        console.error(err);
-                        reject({code: 500, content: new Error('failed to register user')});
-                    });
+                        resolve({success: true, currentUserID: insert.insertId, currentUsername: username});
+                    }).catch(reject);
                 }
-            }).catch(err => {
-                console.error(err);
-                reject({code: 500, content: new Error('failed to count users')});
-            });
+            }).catch(reject);
         }
     })
 }
 
-module.exports = doTheThing;
+module.exports = {http, model};

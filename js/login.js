@@ -15,14 +15,21 @@ function onSubmit(){
     }
     else{
         fetchAPI('login', {username, password}).then(res => {
-            setCookie('currentUserID', res.currentUserID);
-            setCookie('currentUsername', res.currentUsername);
+            if (res.success){
+                setCookie('currentUserID', res.currentUserID);
+                setCookie('currentUsername', res.currentUsername);
 
-            window.location = '/home';
+                window.location = '/home';
+            }
+            else{
+                console.log(res);
+                alert(res.message);
+            }
         }).catch(err => {
-            clearCookies();
             console.error(err);
-            alert(`Login error: ${err.message}!`);
+            alert(err.message);
+
+            clearCookies();
         })
     }
 }
