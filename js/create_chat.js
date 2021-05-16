@@ -107,7 +107,7 @@ function createChat() {
 
     fetchAPI('create-chat', {currentUserID: getCookie('currentUserID'), chatname, usernames}).then(res => {
         if (res.success){
-            alert('gud');
+            window.location = '/chat-list';
         }
         else{
             alert(res.message);
