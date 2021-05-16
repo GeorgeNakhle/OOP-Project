@@ -25,23 +25,30 @@ function model(currentUserID, chatname, usernames){
                 const chatID = chatInsert.insertId;
                 const userIDs = [currentUserID];
 
-                const promises = [];
+                const idProms = [];
 
                 for (const username of usernames){
                     const prom = helper.usernameToUserID(username).then(userID => {
                         if (!userIDs.includes(userID)){
                             userIDs.push(userID);
-                            db.insert('chat_member', {chat_id: chatID, user_id: userID}).then(membInsert => {
-
-                            }).catch(reject);
                         }
                     }).catch(reject);
 
-                    promises.push(prom);
+                    idProms.push(prom);
                 }
 
-                Promise.all(promises).then(() => {
-                    resolve({success: true});
+                Promise.all(idProms).then(() => {
+                    const insProms = [];
+
+                    for (const userID of userIDs){
+                        const prom = db.insert('chat_member', {chat_id: chatID, user_id: userID}).then(membInsert => {
+
+                        }).catch(reject);
+                    }
+
+                    Promise.all(insProms).then(() => {
+                        resolve({success: true});
+                    }).catch(reject);
                 }).catch(reject);
             }).catch(reject);
         }
