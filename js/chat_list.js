@@ -1,7 +1,7 @@
-function openChat() {
-    alert("open chat")
+function openChat(id) {
+    window.location = `/chat?id=${id}&currentUserID=${getCookie('currentUserID')}`;
 }
 
-function openOptions() {
-    alert("open options");
+function openOptions(id) {
+    window.location = `/chat?id=${id}&currentUserID=${getCookie('currentUserID')}`;
 }

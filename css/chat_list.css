@@ -1,5 +1,6 @@
 body {
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 #topPart {
@@ -9,6 +10,7 @@ body {
 
 #scroll {
     overflow-y: scroll;
+    height: 100%;
 }
 
 .chatRow:nth-of-type(1n) {

@@ -5,7 +5,7 @@ router.post('/check-for-username', (request, response) => {
     helper.checkIfUsernameExists(request.body.username).then(exists => {
         response.status(200).end(JSON.stringify(exists))
     }).catch(err => {
-        response.status(500).end(JSON.stringify({error: err.message}));
+        response.status(500).end(JSON.stringify({ error: err.message }));
     });
 });
 

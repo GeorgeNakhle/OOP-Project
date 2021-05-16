@@ -1,21 +1,29 @@
+const Contact = require('../../classes/Contact');
+const getChatList = require(`${process.env.api}/getChatList`).model
+
 function doStuff(request) {
+    let chats = [];
     return new Promise((resolve, reject) => {
 
-        const getContactList = require(`${process.env.api}/get-chat-list`);
-        getContactList.model(currentUserID).then(res => {
-            if (res.success) {
-                // the stuff is in res.contacts
-            }
-            else {
-                // error message in res.message
-            }
-        }).catch(err => {
-            // err is the error object
-        })
+        const currentUserID = request.query.currentUserID;
+        if (currentUserID) {
+            getChatList(currentUserID).then(res => {
+                if (res.success) {
+                    chats = res.chats;
 
-        resolve({
-            payload: alphabetList,
-        })
+                    resolve({
+                        header: "Chat List!",
+                        title: "Chat List",
+                        chats: chats,
+                    });
+                }
+            });
+        } else {
+            resolve({
+                header: "Chat List!",
+                title: "Chat List",
+            })
+        }
     });
 }
 
