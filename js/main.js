@@ -21,16 +21,8 @@ correctURL();
 
 const socket = io();
 
-if (getCookie('currentUserID')){
-    socket.emit('hello', {userID: getCookie('currentUserID'), username: getCookie('currentUsername')});
-}
-
 socket.on('error', err => {
     alert(err.message);
-})
-
-socket.on('message', data => {
-    console.log(data);
 })
 
 /**

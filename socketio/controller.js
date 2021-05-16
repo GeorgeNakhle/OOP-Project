@@ -24,6 +24,7 @@ function start(io) {
             console.log('hello from', data);
             socket.userID = data.userID;
             socket.username = data.username;
+            socket.chatID = data.chatID;
         })
 
         socket.on('message', data => {
@@ -63,21 +64,9 @@ function sendMessageToSockets(sockets, sendingSocket, chatID, content, sentOn) {
         if (socket == sendingSocket) continue;
         if (!socket.userID) continue;
 
-        getChatList(socket.userID).then(res => {
-            if (res.success) {
-                for (const chat of res.chats) {
-                    if (chat.chat_id == chatID) {
-                        socket.emit('message', { username: sendingSocket.username, chatID, content, sentOn });
-                        return;
-                    }
-                }
-            }
-            else {
-                console.error(res);
-            }
-        }).catch(err => {
-            console.error(err);
-        })
+        if (socket.chatID == chatID){
+            socket.emit('message', { username: sendingSocket.username, chatID, content, sentOn });
+        }
     }
     sendingSocket.emit("sent");
 }
