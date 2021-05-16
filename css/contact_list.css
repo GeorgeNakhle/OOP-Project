@@ -2,9 +2,10 @@ body {
     flex-direction: column;
     justify-content: flex-start;
 }
-#contact-searchbar {
-    width: 90%;
-    height: 25px;
+#contact-button {
+    width: 100%;
+    font-weight: 900;
+    font-size: 24px;
 }
 .contact-group-head {
     padding-left: 5px;
@@ -16,6 +17,7 @@ body {
     text-indent: 7%;
 }
 .contact-group-item {
+    cursor: pointer;
     padding-bottom: 3px;
     padding-top: 3px;
 }
