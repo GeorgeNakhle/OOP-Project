@@ -1,11 +1,14 @@
 body {
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 #scroll {
     overflow-y: scroll;
 }
-
+#headerDiv{
+    margin-bottom: 100px;
+}
 #topPart {
     width: 100%;
     text-align: center;
