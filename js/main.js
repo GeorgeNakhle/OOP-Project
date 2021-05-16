@@ -1,16 +1,24 @@
 console.log('Hello from main.js');
 
+// Correct the URL if user is somewhere they shouldnt be
 function correctURL(){
+    // Get the current URI path
     const path = window.location.pathname;
+    // Bool if the user is current on the login or register page
     const onLoginOrRegister = path.startsWith('/login') || path.startsWith('/register');
+    // Bool if the user is currently logged in
     const loggedIn = getCookie('currentUserID') != null;
 
+    // If not logged in and not on the login/register page
+    // Redirect to login page
     if (!loggedIn){
         if (!onLoginOrRegister){
             window.location = '/login';
         }
     }
     else{
+        // If logged in and on the login/register page
+        // Redirect to home page
         if (onLoginOrRegister){
             window.location = '/home';
         }
@@ -19,8 +27,10 @@ function correctURL(){
 
 correctURL();
 
+// Connect socket to server
 const socket = io();
 
+// Show error message if server sends an error event
 socket.on('error', err => {
     alert(err.message);
 })
@@ -33,13 +43,16 @@ socket.on('error', err => {
  */
 function fetchAPI(endpoint, data){
     return new Promise((resolve, reject) => {
+        // POST parameters
         const settings = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         };
 
+        // Call the API endpoint passing the POST parameters
         fetch(`/api/${endpoint}`, settings).then(res => {
+            // If server handled the request without crashing, resolve with JSON object
             if (res.status == 200){
                 res.json().then(resolve).catch(() => {
                     reject(new Error('Failed parsing response!'));
@@ -56,6 +69,7 @@ function fetchAPI(endpoint, data){
  * Deletes local cookie
  */
 function clearCookies(){
+    // Set local storage to empty json array
     window.name = '{}';
 }
 
@@ -67,9 +81,12 @@ function clearCookies(){
 function setCookie(key, value){
     if (window.name == '') window.name = '{}';
     
+    // Get entire object from cookies
     let obj = JSON.parse(window.name);
 
+    // Add new key and value to object
     obj[key] = value;
+    // Readd the cookie object to cookie
     window.name = JSON.stringify(obj);
 }
 
@@ -81,5 +98,6 @@ function setCookie(key, value){
 function getCookie(key){
     if (window.name == '') window.name = '{}';
 
+    // Get cookie object, parse JSON and return value of the key
     return JSON.parse(window.name)[key];
 }

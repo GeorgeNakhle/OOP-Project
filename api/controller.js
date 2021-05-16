@@ -1,14 +1,18 @@
 const router = require('express').Router();
 const helper = require(`${process.env.api}/helper`);
 
+// Check if a username exists
 router.post('/check-for-username', (request, response) => {
     helper.checkIfUsernameExists(request.body.username).then(exists => {
+        // Return bool whether username exists or not
         response.status(200).end(JSON.stringify(exists))
     }).catch(err => {
         response.status(500).end(JSON.stringify({ error: err.message }));
     });
 });
 
+// Route path to respective controller
+// Ex. /api/login to login controller, and use the http method
 router.post('/login', require(`${process.env.api}/login.js`).http);
 router.post('/register', require(`${process.env.api}/register.js`).http);
 

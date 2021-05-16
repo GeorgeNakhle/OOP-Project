@@ -12,11 +12,25 @@ function http(request, response){
     });
 }
 
+/**
+ * Model for leaving a chat
+ * Takes the user ID of the user leaving the chat
+ * the chat name of the chat to leave from
+ * 
+ * Resolves with a success flag, or rejects with an error.
+ * If success
+ *      {success: bool}
+ * Else
+ *      {success: bool, message: string}
+ */
 function model(currentUserID, chatname){
     return new Promise((resolve, reject) => {
+        // Check if chat name exists
         helper.checkIfChatnameExists(chatname).then(exists => {
             if (exists){
+                // Get the chat ID
                 helper.chatnameToChatID(chatname).then(chatID => {
+                    // Remove the user from the chat and resolve
                     db.delete('chat_member', [`chat_id = ${chatID}`, `user_id = ${currentUserID}`]).then(del => {
                         resolve({success: true});
                     }).catch(reject);

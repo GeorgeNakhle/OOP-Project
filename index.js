@@ -6,24 +6,26 @@ const bodyParser = require('body-parser');
 
 // Get the project root path
 const projectRoot = path.dirname(require.main.filename);
+
 // Save MVC paths in env
 process.env.models = path.resolve(projectRoot, 'mvc', 'models');
 process.env.views = path.resolve(projectRoot, 'mvc', 'views');
 process.env.controllers = path.resolve(projectRoot, 'mvc', 'controllers');
-// Save other MVC shit in env
+
+// Save other front-end stuff in env
 process.env.styles = path.resolve(projectRoot, 'css');
 process.env.scripts = path.resolve(projectRoot, 'js');
 process.env.images = path.resolve(projectRoot, 'img');
-// API stuff
+// Save API path in env
 process.env.api = path.resolve(projectRoot, 'api');
-// Classes stuff
-process.env.classes = path.resolve(projectRoot, 'classes');
-// Database stuff
+// Database connection stuff
 process.env.database_host = 'net.tonyvas.top';
 process.env.database_port = 6969;
 process.env.database_user = 'chats_user';
 process.env.database_password = 'Potato123';
+// Database path
 process.env.database = path.resolve(projectRoot, 'database');
+// SocketIO path
 process.env.socketio = path.resolve(projectRoot, 'socketio');
 
 // Partial view renderer
