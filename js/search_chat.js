@@ -24,6 +24,7 @@ function joinChat(chat_id) {
                 fetchAPI('add-to-chat', {chat_id: chat_id, user_id: currentUserID }).then(res => {
                     if(res.success){
                         alert("successfully joined chat!");
+                        window.location = `/chat?currentUserID=${currentUserID}&id=${chat_id}`
                     } else {
                         alert("failed to join chat");
                     }
