@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,15 +11,16 @@
     {{!-- These scripts should go first --}}
     {{>Scripts}}
     {{>Styles}}
-    
+
     {{!-- Styles specific to this view --}}
     <link rel="stylesheet" href="/css/contact_info.css">
     {{!-- Scripts specific to this view --}}
     <script src="/js/contact_info.js"></script>
 </head>
+
 <body>
     <main>
-        <h2>Contact Info</h2>
+        {{>Header title="Contact Info" backPath="/contact-list"}}
         <h3>Username</h3>
         <textarea disabled id="username">{{username}}</textarea>
         <h3>Nickname</h3>
@@ -31,6 +33,7 @@
             <button onclick="deleteContact();" id="delete-button">Delete</button>
         </div>
     </main>
-    
+
 </body>
+
 </html>

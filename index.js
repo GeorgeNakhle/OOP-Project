@@ -26,12 +26,12 @@ process.env.database_password = 'Potato123';
 process.env.database = path.resolve(projectRoot, 'database');
 
 // Partial view renderer
-const {registerPartialTemplate} = require(`${process.env.controllers}/HandlebarsHelper`);
+const { registerPartialTemplate } = require(`${process.env.controllers}/HandlebarsHelper`);
 
 // Port for the back-end to listen on
 const port = process.env.PORT || 8080;
 // Partials for views
-const PARTIALS = [ 'Header', 'Footer', 'Scripts', 'Styles' ];
+const PARTIALS = ['Header', 'Scripts', 'Styles'];
 
 // Create a request listener express app
 const expressApp = express();
@@ -62,7 +62,7 @@ io.on('connection', socket => {
 });
 
 const promises = [];
-for (const partial of PARTIALS){
+for (const partial of PARTIALS) {
     const promise = registerPartialTemplate(partial, `${process.env.views}/partials/${partial}.hbs`);
     promises.push(promise);
 }
@@ -112,7 +112,7 @@ Promise.all(promises).then(() => {
     expressApp.use('/chat-list', require(`${process.env.controllers}/ChatList.js`));
     expressApp.use('/create-chat', require(`${process.env.controllers}/CreateChat.js`));
     expressApp.use('/search-chat', require(`${process.env.controllers}/SearchChat.js`));
-    
+
     expressApp.use('/add-contact', require(`${process.env.controllers}/AddContact.js`));
     expressApp.use('/contact-list', require(`${process.env.controllers}/ContactList.js`));
     expressApp.use('/contact-info', require(`${process.env.controllers}/ContactInfo.js`));
