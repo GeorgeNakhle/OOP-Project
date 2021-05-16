@@ -22,30 +22,20 @@
     {{>Header title="Create a Chat" backPath="/home"}}
     <div id="topPart">
         <div class="inputArea">
+            <input type="text" id="chatname" placeholder="Chat Name">
             <input type="text" id="addUsername" name="addUsername" placeholder="Add by Username">
             <button id="addUsernameButton" onclick="addUsername()">Add User</button>
         </div>
         <h2>Added Contacts</h2>
     </div>
-    <div id="scroll">
-        {{#each addedContacts}}
-        <div class="contactRow">
-            <span class="username">{{username}}</span>
-            <button class="removeButton" onclick="removeContact()">—</button>
-        </div>
-        {{/each}}
-    </div>
+    
+    <div id="added"></div>
+
     <div id="topPart">
         <h2>Add from Contacts</h2>
     </div>
-    <div id="scroll">
-        {{#each contactsList}}
-        <div class="contactRow">
-            <span class="username">{{username}}</span>
-            <button class="addButton" onclick="addContact()">+</button>
-        </div>
-        {{/each}}
-    </div>
+    <div id="not_added"></div>
+
     <div id="topPart">
         <div class="inputArea">
             <button id="createChatButton" onclick="createChat()">Create Chat</button>
