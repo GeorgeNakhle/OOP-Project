@@ -18,21 +18,22 @@ function model(chatID) {
         else {
             const what = [
                 'message.id as "messageID"',
+                'chat_id as "chatID"',
+                'message.user_id as "userID"',
                 'user.username as "username"',
                 'message.content as "content"',
                 'message.sent_on as "timestamp"',
-                'chat.chatname as "chatname"'
+                'chat.chatname as "chatname"',
             ];
             const from = [
                 'user',
                 'message',
-                'chat',
-                'chat_member'
+                'chat'
             ];
             const where = [
                 `${chatID} = message.chat_id`,
-                `${chatID} = chat_member.chat_id`,
-                `${chatID} = chat.id`
+                `${chatID} = chat.id`,
+                `user.id = message.user_id`
             ];
 
             db.select(what, from, where, true).then(messages => {

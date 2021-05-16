@@ -22,16 +22,21 @@
     {{>Header title="Chat" backPath="/chat-list"}}
     <div id="scroll">
         {{#each messages}}
-        <ul class="chatMessage">
-            <li class="messageContact">{{this.username}}</li>
-            <li class="messageText">{{this.content}}</li>
-            <li class="messageDate">{{this.timestamp}}</li>
-        </ul>
-        {{/each}}
+        {{#if this.isCurrent}}
+        <ul class="chatMessage myMessage">
+            {{else}}
+            <ul class="chatMessage">
+                {{/if}}
+                <li class="messageContact">{{this.username}}</li>
+                <li class="messageText">{{this.content}}</li>
+                <li class="messageDate">{{this.timestamp}}</li>
+            </ul>
+
+            {{/each}}
     </div>
 
     <div id="inputArea">
-        <button id="addUserButton" onclick="addUser()">+</button>
+        <button id="addUserButton" onclick="addUser('{{messages.[0].chatID}}')">+</button>
         <input type="text" id="inputText" name="inputText" placeholder="Enter Text Message">
         <button id="enterMessageButton" onclick="sendMessage('{{messages.[0].chatname}}')">➤</button>
     </div>

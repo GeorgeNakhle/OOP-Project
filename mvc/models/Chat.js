@@ -15,6 +15,7 @@ function timeConverter(UNIX_timestamp) {
 function doStuff(request) {
     let messages = [];
     return new Promise((resolve, reject) => {
+        const currentUserID = request.query.currentUserID;
         const chatID = request.query.id;
         if (chatID) {
             getChatMessages(chatID).then(res => {
@@ -22,9 +23,14 @@ function doStuff(request) {
                     messages = res.messages;
 
                     // Convert UNIX timestamp to Date
-                    // Format Date object
+                    // Add field if message ID == current user ID
                     for (i = 0; i < messages.length; i++) {
                         messages[i].timestamp = timeConverter(messages[i].timestamp);
+
+                        if (messages[i].userID == currentUserID) {
+                            console.log("yo");
+                            messages[i].isCurrent = true;
+                        }
                     }
 
                     resolve({
