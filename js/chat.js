@@ -7,13 +7,17 @@ function addUser(id) {
 }
 
 function sendMessage(chatname) {
-    console.log(document.getElementById("inputText").value);
-    console.log(chatname);
-    console.log(socket.emit('message', { chatname: chatname, content: document.getElementById("inputText").value }));
-    // Refresh page when message is sent
-    socket.on("sent", () => {
-        location.reload();
-    })
+    let inputText = document.getElementById("inputText").value;
+    if (inputText == "" || inputText == null) {
+        alert("ERROR: Can't send empty text message.");
+    } else {
+        console.log(`SENDING "${document.getElementById("inputText").value}" TO CHAT: ${chatname}`);
+        console.log(socket.emit('message', { chatname: chatname, content: document.getElementById("inputText").value }));
+        // Refresh page when message is sent
+        socket.on("sent", () => {
+            location.reload();
+        })
+    }
 }
 
 // Scroll to bottom when chat window loads

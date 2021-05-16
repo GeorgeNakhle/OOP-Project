@@ -23,6 +23,10 @@ body {
     padding-left: 248px !important;
 }
 
+.myMessage > .messageText {
+    background-color: blue !important;
+}
+
 .messageContact {
     font-size: 25px;
     font-weight: bold;

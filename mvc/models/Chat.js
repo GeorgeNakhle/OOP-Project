@@ -1,11 +1,11 @@
 const Contact = require('../../classes/Contact');
 const getChatMessages = require(`${process.env.api}/getChatMessages`).model
 
-function timeConverter(UNIX_timestamp) {
-    var date = new Date(UNIX_timestamp * 1000);
-    return date.getDate() +
+function timeFormatter(milliseconds) {
+    var date = new Date(milliseconds);
+    return date.getFullYear() +
         "/" + (date.getMonth() + 1) +
-        "/" + date.getFullYear() +
+        "/" + date.getDate() +
         " " + date.getHours() +
         ":" + date.getMinutes() +
         ":" + date.getSeconds();
@@ -25,17 +25,16 @@ function doStuff(request) {
                     // Convert UNIX timestamp to Date
                     // Add field if message ID == current user ID
                     for (i = 0; i < messages.length; i++) {
-                        messages[i].timestamp = timeConverter(messages[i].timestamp);
+                        messages[i].timestamp = timeFormatter(messages[i].timestamp);
 
                         if (messages[i].userID == currentUserID) {
-                            console.log("yo");
                             messages[i].isCurrent = true;
                         }
                     }
 
                     resolve({
                         header: "Chat!",
-                        title: "Chat",
+                        title: messages[0].chatname,
                         messages: messages,
                     });
                 }
@@ -43,7 +42,7 @@ function doStuff(request) {
         } else {
             resolve({
                 header: "Chat!",
-                title: "Chat",
+                title: messages[0].chatname,
             })
         }
     });
