@@ -1,3 +1,6 @@
+const getChatMembers = require(`${process.env.api}/getChatMembers`)
+const getContactList = require(`${process.env.api}/getContactList`)
+
 function doStuff(request) {
     return new Promise((resolve, reject) => {
 

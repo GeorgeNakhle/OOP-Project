@@ -24,6 +24,7 @@ process.env.database_port = 6969;
 process.env.database_user = 'chats_user';
 process.env.database_password = 'Potato123';
 process.env.database = path.resolve(projectRoot, 'database');
+process.env.socketio = path.resolve(projectRoot, 'socketio');
 
 // Partial view renderer
 const { registerPartialTemplate } = require(`${process.env.controllers}/HandlebarsHelper`);
@@ -45,24 +46,8 @@ httpServer.listen(port, '0.0.0.0', () => {
     console.log(`HTTP Server running on port ${port}! (http://127.0.0.1:${port})`);
 });
 
-let socketCount = 0;
-// Start the socketio server
-// Listen for client connections
-io.on('connection', socket => {
-    socketCount++;
-    console.log(`Socket connected! (${socketCount})`);
-
-    // Listen for client disconnection
-    socket.on('disconnect', () => {
-        socketCount--;
-        console.log(`Socket disconnected! (${socketCount})`);
-    })
-
-    // When a client sends a test event, reply with a test event
-    socket.on('test', () => {
-        socket.emit('test');
-    })
-});
+// Pass the socketIO instance to the controller
+require(`${process.env.socketio}/controller.js`)(io);
 
 const promises = [];
 for (const partial of PARTIALS) {

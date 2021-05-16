@@ -3,17 +3,10 @@ if (!location.search.includes('currentUserID')) {
 }
 
 function addUsername() {
+    //add by username
     alert("add username");
 }
-
-function removeUser() {
-    alert("remove user");
-}
-
 function addContact() {
+    //add from contacts
     alert("add contact");
-}
-
-function addUsers() {
-    alert("add users");
 }

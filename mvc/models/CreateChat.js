@@ -1,56 +1,21 @@
+const getContactList = require(`${process.env.api}/getContactList`).model;
+
 function doStuff(request) {
     return new Promise((resolve, reject) => {
-
-        let addedContacts = [
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            }
-        ];
-
-        let contactsList = [
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            }
-        ];
-
-        resolve({
-            content: "this is some example content from the CreateChat model",
-            addedContacts: addedContacts,
-            contactsList: contactsList
-        })
+        const currentUserID = request.query.currentUserID;
+        if (currentUserID){
+            getContactList(currentUserID).then(res => {
+                if (res.success){
+                    resolve({addedContacts: [{username: 'testy1'}, {username: 'testy1'}], contactsList: res.contacts})
+                }
+                else{
+                    resolve({addedContacts: [],contactsList: []})
+                }
+            });
+        }
+        else{
+            resolve({addedContacts: [],contactsList: []})
+        }
     });
 }
 
