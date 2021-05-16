@@ -19,9 +19,7 @@
 </head>
 
 <body>
-    <div id="topPart">
-        <h2>Chat List</h2>
-    </div>
+    {{>Header title="Chat List" backPath="/home"}}
     <div id="scroll">
         {{#each chats}}
         <div class="chatRow">
