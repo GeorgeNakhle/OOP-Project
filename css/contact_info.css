@@ -21,6 +21,7 @@ h3 {
 #notes-textarea {
     height: 200px;
     resize: none;
+    width: 300px;
 }
 
 #save-delete-buttons {
@@ -32,6 +33,7 @@ h3 {
     margin-right: 10px;
     font-weight: 800;
     height: 30px;
+    
 }
 
 #save-button {
@@ -44,10 +46,14 @@ h3 {
     width: 75px;
 }
 
-main {
-    width: 300px;
-}
-body {
+#contact-info-interface {
     text-align: center;
+    width: 100%;
+}
+
+body {
+    justify-content: flex-start;
+    flex-direction: column;
+    /* text-align: center; */
 }
 

@@ -1,5 +1,6 @@
 body {
     flex-direction: column;
+    justify-content: flex-start;
 }
 #contact-searchbar {
     width: 90%;
@@ -19,5 +20,6 @@ body {
     padding-top: 3px;
 }
 .scroll {
+    height: 100%;
     overflow-y: scroll;
 }
