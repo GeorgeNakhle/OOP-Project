@@ -1,12 +1,12 @@
+h3 {
+    margin-bottom: 12px;
+}
+
 #nickname-textarea {
     resize: none;
     text-align: center;
     line-height: 0.9;
     padding-top: 11px;
-}
-
-h3 {
-    margin-bottom: 12px;
 }
 
 #username-textarea {
