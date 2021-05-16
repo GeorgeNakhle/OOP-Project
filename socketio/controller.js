@@ -2,7 +2,7 @@ const db = require(`${process.env.database}/db`);
 const helper = require(`${process.env.api}/helper`);
 const getChatList = require(`${process.env.api}/getChatList`).model;
 
-function start(io){
+function start(io) {
     const sockets = [];
 
     // Start the socketio server
@@ -14,7 +14,7 @@ function start(io){
         // Listen for client disconnection
         socket.on('disconnect', () => {
             const i = sockets.indexOf(socket);
-            if (i >= 0){
+            if (i >= 0) {
                 sockets.splice(i, 1);
                 console.log(`Socket disconnected! (${sockets.length})`);
             }
@@ -27,19 +27,19 @@ function start(io){
         })
 
         socket.on('message', data => {
-            if (!socket.userID || !socket.username){
+            if (!socket.userID || !socket.username) {
                 return socket.emit('error', new Error('You did not say hello yet!'));
             }
 
-            const {chatname, content} = data;
+            const { chatname, content } = data;
             const currentUserID = socket.userID;
             const username = socket.username;
 
             helper.checkIfChatnameExists(chatname).then(exists => {
-                if (exists){
+                if (exists) {
                     helper.chatnameToChatID(chatname).then(chatID => {
                         const sentOn = new Date().valueOf();
-                        db.insert('message', {user_id: currentUserID, chat_id: chatID, content, sent_on: sentOn}).then(insert => {
+                        db.insert('message', { user_id: currentUserID, chat_id: chatID, content, sent_on: sentOn }).then(insert => {
                             sendMessageToSockets(sockets, socket, chatID, content, sentOn);
                         }).catch(err => {
                             console.error(err);
@@ -50,7 +50,7 @@ function start(io){
                         socket.emit('error', err);
                     });
                 }
-                else{
+                else {
                     socket.emit('error', new Error('Chat does not exist!'));
                 }
             })
@@ -58,27 +58,28 @@ function start(io){
     });
 }
 
-function sendMessageToSockets(sockets, sendingSocket, chatID, content, sentOn){
-    for (const socket of sockets){
+function sendMessageToSockets(sockets, sendingSocket, chatID, content, sentOn) {
+    for (const socket of sockets) {
         if (socket == sendingSocket) continue;
         if (!socket.userID) continue;
 
         getChatList(socket.userID).then(res => {
-            if (res.success){
-                for (const chat of res.chats){
-                    if (chat.chat_id == chatID){
-                        socket.emit('message', {username: sendingSocket.username, chatID, content, sentOn});
+            if (res.success) {
+                for (const chat of res.chats) {
+                    if (chat.chat_id == chatID) {
+                        socket.emit('message', { username: sendingSocket.username, chatID, content, sentOn });
                         return;
                     }
                 }
             }
-            else{
+            else {
                 console.error(res);
             }
         }).catch(err => {
             console.error(err);
         })
     }
+    sendingSocket.emit("sent");
 }
 
 module.exports = start;

@@ -23,7 +23,7 @@
     <div id="scroll">
         {{#each chats}}
         <div class="chatRow">
-            <button class="optionsButton" onclick="openOptions('{{this.chat_id}}')">⋮</button>
+            <button class="optionsButton" onclick="openOptions('{{this.chat_id}}', '{{this.chatname}}')">⋮</button>
             <span class="chatName" onclick="openChat('{{this.chat_id}}')">{{this.chatname}}</span>
             <span> | </span>
             <span class="chatDate">{{this.count}} users</span>

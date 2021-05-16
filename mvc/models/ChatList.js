@@ -27,6 +27,4 @@ function doStuff(request) {
     });
 }
 
-
-
 module.exports = { doStuff };
