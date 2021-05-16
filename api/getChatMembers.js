@@ -1,5 +1,6 @@
 const db = require(`${process.env.database}/db`);
 const helper = require(`${process.env.api}/helper`);
+//gets all members of a chat given a chat_id
 
 function http(request, response){
     const {chat_id} = request.body;

@@ -1,5 +1,6 @@
 const db = require(`${process.env.database}/db`);
 const helper = require(`${process.env.api}/helper`);
+//finds chats in the database  whose name contains the search string provided
 
 function http(request, response){
     const {searchParams} = request.body;
