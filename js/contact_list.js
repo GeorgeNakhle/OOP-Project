@@ -4,8 +4,8 @@ if (!location.search.includes('currentUserID')){
 if (!getCookie('currentUserID')){
     window.location = '/login';
 }
-function displayInfo(username){
-    window.location = `/contact-info?username=${username}`;
+function displayInfo(id){
+    window.location = `/contact-info?id=${id}&currentUserID=${getCookie('currentUserID')}`;
     //alert(username)
 };
 

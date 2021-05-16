@@ -43,6 +43,7 @@ function modelByUsername(currentUserID, contactUsername){
 }
 
 function modelByUserID(currentUserID, contactID){
+    console.log(currentUserID, contactID);
     return new Promise((resolve, reject) => {
         if (!currentUserID){
             resolve({success: false, message: 'No currentUserID provided!'});
@@ -72,7 +73,7 @@ function modelByUserID(currentUserID, contactID){
                     resolve({success: false, message: 'Contact does not exist!'});
                 }
                 else{
-                    console.log(contact[0]);
+                    console.log(contacts[0]);
                     resolve({success: true, contact: contacts[0]});
                 }
             }).catch(reject);

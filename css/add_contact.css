@@ -18,6 +18,7 @@ h3 {
 #notes-textarea {
     height: 200px;
     resize: none;
+    width: 300px;
 }
 
 #save-button {
@@ -27,11 +28,12 @@ h3 {
     font-weight: 800;
     height: 30px;
 }
-
-main {
-    width: 300px;
+#contact-add-interface {
+    text-align: center;
+    width: 100%;
 }
 body {
-    text-align: center;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
