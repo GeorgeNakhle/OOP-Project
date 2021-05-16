@@ -24,7 +24,7 @@
         {{#each chats}}
         <div class="chatRow">
             <button class="optionsButton" onclick="openOptions()">⋮</button>
-            <span class="chatName">{{name}}</span>
+            <span class="chatName" onclick="openChat()">{{name}}</span>
             <span> | </span>
             <span class="chatDate">{{date}}</span>
         </div>
