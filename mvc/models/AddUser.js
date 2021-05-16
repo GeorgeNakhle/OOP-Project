@@ -4,8 +4,8 @@ const getContactList = require(`${process.env.api}/getContactList`).model
 function doStuff(request) {
     return new Promise((resolve, reject) => {
 
-        let currentChatID = 1 //request.query.id
-        let currentUserID = 6 //request.query.currentUserID;
+        let currentChatID = request.query.id
+        let currentUserID = request.query.currentUserID;
         let contacts = [];
         let addedContacts = [];
         getContactList(currentUserID).then(res => {
@@ -38,7 +38,7 @@ function doStuff(request) {
                         resolve({
                             addedContacts: addedContacts,
                             contacts: contacts,
-                            backPath: `/chat?id=${currentChatID}`,
+                            backPath: `/chat?id=${currentChatID}&currentUserID=${currentUserID}`,
                         })
                     }
                 })
