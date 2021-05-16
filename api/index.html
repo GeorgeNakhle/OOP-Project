@@ -55,6 +55,7 @@
 
     <main>
         <div id="nav">
+            <a href="#check-for-username"><button>Check for Username</button></a>
             <a href="#login"><button>Login</button></a>
             <a href="#register"><button>Register</button></a>
             <a href="#get-contact-list"><button>Get Contact List</button></a>
@@ -74,6 +75,25 @@
     
         <div id="doc">
             <ul id="doc_list">
+                <li id="check-for-username">
+                    <h2>POST /api/check-for-username</h2>
+                    <fieldset>
+                        <legend>Body</legend>
+                        <ul>
+                            <h3>username</h3>
+                            <p>The username to check if exists</p>
+                        </ul>
+                    </fieldset>
+        
+                    <fieldset>
+                        <legend>Result on Success</legend>
+                        <ul>
+                            <h3>exists</h3>
+                            <p>Bool, true if exists, false if doesn't</p>
+                        </ul>
+                    </fieldset>
+                </li>
+
                 <li id="login">
                     <h2>POST /api/login</h2>
                     <fieldset>
@@ -89,6 +109,8 @@
                     <fieldset>
                         <legend>Result on Success</legend>
                         <ul>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
                             <h3>currentUserID</h3>
                             <p>The ID of the user</p>
                             <h3>currentUsername</h3>
@@ -112,6 +134,8 @@
                     <fieldset>
                         <legend>Result on Success</legend>
                         <ul>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
                             <h3>currentUserID</h3>
                             <p>The ID of the user</p>
                             <h3>currentUsername</h3>
@@ -136,6 +160,8 @@
                             <h3>Contact[]</h3>
                             <p>A list of contacts containing</p>
                             <ul>
+                                <h3>success</h3>
+                                <p>Boolean indicating whether request was successfully completed</p>
                                 <h4>userID</h4>
                                 <p>The ID of the contact user</p>
                                 <h4>username</h4>
@@ -154,14 +180,16 @@
                         <ul>
                             <h3>currentUserID</h3>
                             <p>The ID of the currently logged in user</p>
-                            <h3>contactID</h3>
-                            <p>The ID of the contact user</p>
+                            <h3>contactID or contactUsername</h3>
+                            <p>The ID or username of the contact user</p>
                         </ul>
                     </fieldset>
         
                     <fieldset>
                         <legend>Result on Success</legend>
                         <ul>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
                             <h3>Contact</h3>
                             <p>A contact containing</p>
                             <ul>
@@ -197,20 +225,56 @@
                     <fieldset>
                         <legend>Result on Success</legend>
                         <ul>
-                            <h3>Nothing</h3>
-                            <p>Nothing is returned to the client</p>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
                         </ul>
                     </fieldset>
                 </li>
         
                 <li id="update-contact">
                     <h2>/api/update-contact</h2>
-                    <h2>TODO</h2>
+                    <fieldset>
+                        <legend>Body</legend>
+                        <ul>
+                            <h3>currentUserID</h3>
+                            <p>The ID of the user currently logged in</p>
+                            <h3>contactID or contactUsername</h3>
+                            <p>The ID or the username of the contact user to update</p>
+                            <h3>nickname (Optional)</h3>
+                            <p>The nickname to assign to the contact user</p>
+                            <h3>notes (Optional)</h3>
+                            <p>Notes to add to the contact user</p>
+                        </ul>
+                    </fieldset>
+        
+                    <fieldset>
+                        <legend>Result on Success</legend>
+                        <ul>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
+                        </ul>
+                    </fieldset>
                 </li>
         
                 <li id="delete-contact">
                     <h2>/api/delete-contact</h2>
-                    <h2>TODO</h2>
+                    <fieldset>
+                        <legend>Body</legend>
+                        <ul>
+                            <h3>currentUserID</h3>
+                            <p>The ID of the user currently logged in</p>
+                            <h3>contactID or contactUsername</h3>
+                            <p>The ID or the username of the user to add to a contact</p>
+                        </ul>
+                    </fieldset>
+        
+                    <fieldset>
+                        <legend>Result on Success</legend>
+                        <ul>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
+                        </ul>
+                    </fieldset>
                 </li>
                 
                 <li id="get-chat-list">

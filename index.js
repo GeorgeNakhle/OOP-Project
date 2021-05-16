@@ -45,14 +45,17 @@ httpServer.listen(port, '0.0.0.0', () => {
     console.log(`HTTP Server running on port ${port}! (http://127.0.0.1:${port})`);
 });
 
+let socketCount = 0;
 // Start the socketio server
 // Listen for client connections
 io.on('connection', socket => {
-    console.log('Socket connected!');
+    socketCount++;
+    console.log(`Socket connected! (${socketCount})`);
 
     // Listen for client disconnection
     socket.on('disconnect', () => {
-        console.log('Socket disconnected!');
+        socketCount--;
+        console.log(`Socket disconnected! (${socketCount})`);
     })
 
     // When a client sends a test event, reply with a test event

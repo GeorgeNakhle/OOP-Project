@@ -1,8 +1,3 @@
-if (getCookie('currentUserID')){
-    alert(`Already logged in as ${getCookie('currentUsername')}!`);
-    window.location = '/home';
-}
-
 function onSubmit(){
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -15,14 +10,22 @@ function onSubmit(){
     }
     else{
         fetchAPI('login', {username, password}).then(res => {
-            setCookie('currentUserID', res.currentUserID);
-            setCookie('currentUsername', res.currentUsername);
+            if (res.success){
+                clearCookies();
+                setCookie('currentUserID', res.currentUserID);
+                setCookie('currentUsername', res.currentUsername);
 
-            window.location = '/home';
+                window.location = '/home';
+            }
+            else{
+                console.log(res);
+                alert(res.message);
+            }
         }).catch(err => {
-            clearCookies();
             console.error(err);
-            alert(`Login error: ${err.message}!`);
+            alert(err.message);
+
+            clearCookies();
         })
     }
 }

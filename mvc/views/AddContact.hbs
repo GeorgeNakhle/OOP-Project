@@ -19,19 +19,21 @@
 </head>
 
 <body>
-    <main>
-        {{>Header title="Add a Contact" backPath="/contact-list"}}
-        <h3>Username</h3>
-        <textarea id="username-textarea"></textarea>
-        <h3>Nickname</h3>
-        <textarea cols="40" id="nickname-textarea"></textarea>
-        <h3>Notes</h3>
-        <textarea id="notes-textarea"></textarea>
-        <div>
-            <button id="save-button" onclick="addContact();">Save</button>
-        </div>
+    {{!-- <main> --}}
 
-    </main>
+        {{>Header title="Add a Contact" backPath="/contact-list"}}
+        <div id="contact-add-interface">
+            <h3>Username</h3>
+            <textarea id="username-textarea"></textarea>
+            <h3>Nickname</h3>
+            <textarea cols="40" id="nickname-textarea"></textarea>
+            <h3>Notes</h3>
+            <textarea id="notes-textarea"></textarea>
+            <div>
+                <button id="save-button" onclick="addContact();">Save</button>
+            </div>
+        </div>
+    {{!-- </main> --}}
 </body>
 
 </html>
