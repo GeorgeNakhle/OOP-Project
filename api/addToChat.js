@@ -1,6 +1,8 @@
 const db = require(`${process.env.database}/db`);
 const helper = require(`${process.env.api}/helper`);
 
+//Adds a entry to the chat_member table using either user ID or username
+
 function http(request, response){
     const {chat_id, user_id, username} = request.body;
     if (user_id){

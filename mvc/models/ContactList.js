@@ -1,4 +1,3 @@
-const Contact = require('../../classes/Contact');
 const getContactList = require(`${process.env.api}/getContactList`).model
 
 
