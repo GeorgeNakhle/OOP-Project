@@ -1,8 +1,3 @@
-if (getCookie('currentUserID')){
-    alert(`Already logged in as ${getCookie('currentUsername')}!`);
-    window.location = '/home';
-}
-
 function onSubmit(){
     const username = document.getElementById('username').value;
     const passwords = document.getElementsByClassName('password');
@@ -21,6 +16,7 @@ function onSubmit(){
 
         fetchAPI('register', {username, password}).then(res => {
             if (res.success){
+                clearCookies();
                 setCookie('currentUserID', res.currentUserID);
                 setCookie('currentUsername', res.currentUsername);
 
