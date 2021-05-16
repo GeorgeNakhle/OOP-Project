@@ -19,8 +19,8 @@ body {
     align-content: center;
 }
 
-#addUsername {
-    height: 100%;
+#addUsername, #chatname {
+    height: 70%;
     width: 60%;
     padding: 0px;
     margin-bottom: 10px;
