@@ -47,7 +47,9 @@ function model(currentUserID, chatname, usernames){
                     }
 
                     Promise.all(insProms).then(() => {
-                        resolve({success: true});
+                        db.insert('message', {user_id: currentUserID, chat_id: chatID, content: 'Chat created!', sent_on: new Date().valueOf()}).then(ins => {
+                            resolve({success: true});
+                        });
                     }).catch(reject);
                 }).catch(reject);
             }).catch(reject);
