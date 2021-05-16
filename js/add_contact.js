@@ -1,3 +1,7 @@
+if (!getCookie('currentUserID')){
+    window.location = '/login';
+}
+
 function addContact() {
 
     //Current User cookies
@@ -14,24 +18,36 @@ function addContact() {
     } else if (contactUsername == currentUsername) {
         alert ('You cannot add yourself as a contact!');
     } else {
-        //check if contact already exists
-        fetchAPI('get-contact-list', {currentUserID}).then(res => {
-            if(res.find(contact => { return contact.username === contactUsername })){
-                alert(`Contact error: user already in contacts`);
+        fetchAPI('check-for-username', {username: contactUsername}).then(res => {
+            if(!res){
+                alert(`User "${contactUsername}" does not exist. Please try again`)
             } else {
-                //add contact to DB
-                fetchAPI('create-contact', {currentUserID, contactUsername, nickname, notes}).then(res => {
-        
-                    alert(`${contactUsername} added as contact!`);
-                    window.location = '/contact-list';
-                }).catch(err => {
+                //check if contact already exists
+                fetchAPI('get-contact-list', {currentUserID: currentUserID}).then(res => {
+                    console.log(res);
+                    if(res.success && res.contacts.find(contact => { return contact.username === contactUsername })){
+                        alert(`Contact error: user already in contacts`);
+                    } else {
+                        //add contact to DB
+                        fetchAPI('create-contact', {currentUserID, contactUsername, nickname, notes}).then(res => {
+                
+                            alert(`${contactUsername} added as contact!`);
+                            window.location = '/contact-list';
+                        }).catch(err => {
+                            console.error(err);
+                            alert(`Contact error: ${err.message}!`);
+                        })
+                    } 
+                }).catch(err => { 
                     console.error(err);
                     alert(`Contact error: ${err.message}!`);
                 })
-            } 
-        }).catch(err => { 
+            }
+        }).catch(err => {
             console.error(err);
             alert(`Contact error: ${err.message}!`);
         })
+        
+        
     } 
 }

@@ -1,3 +1,6 @@
+if (!getCookie('currentUserID')){
+    window.location = '/login';
+}
 const currentUserID = getCookie('currentUserID');
 
 function editContact(){
