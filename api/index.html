@@ -294,7 +294,23 @@
         
                 <li id="create-chat">
                     <h2>/api/create-chat</h2>
-                    <h2>TODO</h2>
+                    <fieldset>
+                        <legend>Body</legend>
+                        <ul>
+                            <h3>currentUserID</h3>
+                            <p>The ID of the user currently logged in</p>
+                            <h3>usernames[]</h3>
+                            <p>List of usernames of users to add to the chat upon creation</p>
+                        </ul>
+                    </fieldset>
+        
+                    <fieldset>
+                        <legend>Result on Success</legend>
+                        <ul>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
+                        </ul>
+                    </fieldset>
                 </li>
         
                 <li id="add-to-chat">
@@ -314,7 +330,23 @@
         
                 <li id="leave-chat">
                     <h2>/api/leave-chat</h2>
-                    <h2>TODO</h2>
+                    <fieldset>
+                        <legend>Body</legend>
+                        <ul>
+                            <h3>currentUserID</h3>
+                            <p>The ID of the user currently logged in</p>
+                            <h3>chatname</h3>
+                            <p>The name of the chat the user wishes to leave</p>
+                        </ul>
+                    </fieldset>
+        
+                    <fieldset>
+                        <legend>Result on Success</legend>
+                        <ul>
+                            <h3>success</h3>
+                            <p>Boolean indicating whether request was successfully completed</p>
+                        </ul>
+                    </fieldset>
                 </li>
             </ul>
         </div>
