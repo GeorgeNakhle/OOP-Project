@@ -50,14 +50,29 @@ body {
 
 #inputText {
     height: 90%;
-    width: 88%;
+    width: 77%;
     padding: 0px;
     outline: 0px;
     font-size: 20px;
     background-color: beige;
 }
 
-#inputButton {
+#addUserButton {
+    height: 80%;
+    width: 10%;
+    padding: 0px;
+    border: 0px;
+    background-color: green;
+    color: white;
+}
+
+#addUserButton:hover {
+    background-color: white;
+    color: green;
+    cursor: pointer;
+}
+
+#enterMessageButton {
     height: 97%;
     width: 10%;
     padding: 0px;
@@ -66,7 +81,7 @@ body {
     color: white;
 }
 
-#inputButton:hover {
+#enterMessageButton:hover {
     background-color: white;
     color: teal;
     cursor: pointer;

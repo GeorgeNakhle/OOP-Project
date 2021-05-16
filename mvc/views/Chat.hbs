@@ -23,16 +23,17 @@
     <div id="scroll">
         {{#each messages}}
         <ul class="chatMessage">
-            <li class="messageContact">{{contact}}</li>
-            <li class="messageText">{{text}}</li>
-            <li class="messageDate">{{date}}</li>
+            <li class="messageContact">{{this.username}}</li>
+            <li class="messageText">{{this.content}}</li>
+            <li class="messageDate">{{this.timestamp}}</li>
         </ul>
         {{/each}}
     </div>
 
     <div id="inputArea">
+        <button id="addUserButton" onclick="addUser()">+</button>
         <input type="text" id="inputText" name="inputText" placeholder="Enter Text Message">
-        <button id="inputButton" onclick="sendMessage()">➤</button>
+        <button id="enterMessageButton" onclick="sendMessage('{{messages.[0].chatname}}')">➤</button>
     </div>
 </body>
 
