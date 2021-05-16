@@ -1,59 +1,53 @@
-const getChatMembers = require(`${process.env.api}/getChatMembers`)
-const getContactList = require(`${process.env.api}/getContactList`)
+const getChatMembers = require(`${process.env.api}/getChatMembers`).model
+const getContactList = require(`${process.env.api}/getContactList`).model
 
 function doStuff(request) {
     return new Promise((resolve, reject) => {
 
-        let addedContacts = [
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            },
-            {
-                username: "Johnny Sins"
-            }
-        ];
+        let currentChatID = request.query.id
+        let currentUserID = request.query.currentUserID;
+        let contacts = [];
+        let addedContacts = [];
+        getContactList(currentUserID).then(res => {
+            if(res.success){
+                contacts = res.contacts.sort(function(a, b) {
+                    var userA = a.username.toUpperCase(); 
+                    var userB = b.username.toUpperCase(); 
+                    if (userA < userB) {
+                      return -1;
+                    }
+                    if (userA > userB) {
+                      return 1;
+                    }
+                    return 0;
+                });
+                getChatMembers(currentChatID).then(res => {
+                    if(res.success){
+                        addedContacts = res.members;
+                        let duplicateContacts = [];
+                        contacts.forEach(function(contact){
+                            if(addedContacts.find(function(user){
+                                return user.username == contact.username
+                            })){
+                                duplicateContacts.push(contact);
+                            }
+                        });
+                        contacts = contacts.filter((contact) => !duplicateContacts.includes(contact));
 
-        let contactsList = [
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
-            },
-            {
-                username: "Meg Thomas"
+                        
+                        resolve({
+                            addedContacts: addedContacts,
+                            contacts: contacts,
+                            backPath: `/chat?id=${currentChatID}&currentUserID=${currentUserID}`,
+                        })
+                    }
+                })
+                
+                
             }
-        ];
+        });
 
-        resolve({
-            content: "this is some example content from the AddUser model",
-            addedContacts: addedContacts,
-            contactsList: contactsList
-        })
+       
     });
 }
 

@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    {{>Header title="Add a User" backPath="/chat"}}
+    {{>Header title="Add a User" }}
     <div id="topPart">
         <div class="inputArea">
             <input type="text" id="addUsername" name="addUsername" placeholder="Add by Username">
@@ -39,10 +39,10 @@
         <h2>Add from Contacts</h2>
     </div>
     <div id="scroll">
-        {{#each contactsList}}
+        {{#each contacts}}
         <div class="contactRow">
             <span class="username">{{username}}</span>
-            <button class="addButton" onclick="addContact()">+</button>
+            <button class="addButton" onclick="addContact('{{userID}}')">+</button>
         </div>
         {{/each}}
     </div>
