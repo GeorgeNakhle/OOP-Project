@@ -19,8 +19,11 @@
 </head>
 
 <body>
+    {{!-- Header partial --}}
     {{>Header title="Chat List" backPath="/home"}}
+    {{!-- Scrollable div --}}
     <div id="scroll">
+        {{!-- Loop over all chats from model --}}
         {{#each chats}}
         <div class="chatRow">
             <button class="optionsButton" onclick="openOptions('{{this.chat_id}}', '{{this.chatname}}')">⋮</button>

@@ -19,9 +19,13 @@
 </head>
 
 <body>
+    {{!-- Header partial --}}
     {{>Header backPath="/chat-list"}}
+    {{!-- Scrollable div --}}
     <div id="scroll">
+        {{!-- Loop over all messages from model --}}
         {{#each messages}}
+        {{!-- If current message is from current user -> CHANGE STYLING --}}
         {{#if this.isCurrent}}
         <ul class="chatMessage myMessage">
             {{else}}
@@ -31,13 +35,14 @@
                 <li class="messageText">{{this.content}}</li>
                 <li class="messageDate">{{this.timestamp}}</li>
             </ul>
-
             {{/each}}
     </div>
 
+    {{!-- Bottom area --}}
     <div id="inputArea">
         <button id="addUserButton" onclick="addUser('{{messages.[0].chatID}}')">+</button>
         <input type="text" id="inputText" name="inputText" placeholder="Enter Text Message">
+        {{!-- Get chatname from first message object in the chat --}}
         <button id="enterMessageButton" onclick="sendMessage('{{messages.[0].chatname}}')">➤</button>
     </div>
 </body>

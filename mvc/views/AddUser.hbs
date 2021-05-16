@@ -19,7 +19,9 @@
 </head>
 
 <body>
+    {{!-- Header partial --}}
     {{>Header title="Add a User" }}
+    {{!-- Add by username part --}}
     <div id="topPart">
         <div class="inputArea">
             <input type="text" id="addUsername" name="addUsername" placeholder="Add by Username">
@@ -27,7 +29,10 @@
         </div>
         <h2>Added Users</h2>
     </div>
+
+    {{!-- Scrollable div --}}
     <div id="scroll">
+        {{!-- Loop over all users in current chat --}}
         {{#each addedContacts}}
         <div class="contactRow">
             <span class="username">{{username}}</span>
@@ -35,10 +40,14 @@
         </div>
         {{/each}}
     </div>
+
     <div id="topPart">
         <h2>Add from Contacts</h2>
     </div>
+
+    {{!-- Scrollable div --}}
     <div id="scroll">
+        {{!-- Loop over all contacts in Contact List --}}
         {{#each contacts}}
         <div class="contactRow">
             <span class="username">{{username}}</span>

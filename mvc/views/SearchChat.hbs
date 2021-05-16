@@ -19,7 +19,9 @@
 </head>
 
 <body>
+    {{!-- Header partial --}}
     {{>Header title="Search for Chat" backPath="/home"}}
+    {{!-- Search for chat text field --}}
     <div id="topPart">
         <div id="inputArea">
             <input type="text" id="searchText" name="searchText" value="{{searched}}" placeholder="Search for Chat">
@@ -27,7 +29,10 @@
         </div>
         <h2>Results</h2>
     </div>
+
+    {{!-- Scrollable div --}}
     <div id="scroll">
+        {{!-- Loop over every chat from model --}}
         {{#each chats}}
         <div class="chatRow">
             <button class="optionsButton" onclick="openOptions()">⋮</button>
