@@ -38,6 +38,7 @@ function doStuff(request) {
                         resolve({
                             addedContacts: addedContacts,
                             contacts: contacts,
+                            backPath: `/chat?id=${currentChatID}`,
                         })
                     }
                 })
