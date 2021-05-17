@@ -57,7 +57,7 @@ require(`${process.env.socketio}/controller.js`)(io);
 
 const promises = [];
 for (const partial of PARTIALS) {
-    const promise = registerPartialTemplate(partial, `${process.env.views}/partials/${partial}.hbs`);
+    const promise = registerPartialTemplate(partial, `${process.env.views}/Partials/${partial}.hbs`);
     promises.push(promise);
 }
 
